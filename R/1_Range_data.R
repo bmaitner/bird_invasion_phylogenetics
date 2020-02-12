@@ -76,4 +76,4 @@ rm(raster_i,raster_i_cover,sp_i,shapefiles,i)
 skinny_occurrences<-as.data.frame(skinny_occurrences)
 colnames(skinny_occurrences)<-c("species","cell","origin","percent_cover")
 
-write.csv(x = skinny_occurrences,file = "data/cea_occurrences.csv",row.names = F)
+saveRDS(object = skinny_occurrences,file = "data/cea_occurrences.rds")
