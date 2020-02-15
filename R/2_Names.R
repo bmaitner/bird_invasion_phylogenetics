@@ -48,7 +48,7 @@ occs$species <- gsub(pattern = " ",replacement = "_",x = occs$species)
 
 
 #get a list of the cells that the introduced species occur in
-native_cells <- unique(which(occs$species %in% unique(introductions$Species)))
+native_cells <- occs$cell[which(occs$species %in% unique(introductions$Species))]
 
 #use the native cell list to get a list of all relevant species
 native_species_to_check <- unique(occs$species[which(occs$cell %in% native_cells)])
@@ -103,9 +103,7 @@ trees <- list.files("data/Bird_Phylogeny/",pattern = "tree_",full.names = T)
 tree1 <- read.tree(trees[1])
 tree <- read.tree(trees[1])
 
-#manually run code in name_fixing.R here
-#function to correct bird tree names to match birdlife taxonomy
-
+#try to correct names in an automated fashion first, then manually if need be
 #inputs needed:
 #tree
 #combined_species_to_check
@@ -128,13 +126,14 @@ for(i in 1:length(to_correct)){
   syn_i <- syn_i[which(syn_i!="")]
   
   
-  #if(length(syn_i)>1){stop()}
+  if(length(syn_i)>1){stop()}
   
   if(length(syn_i)>0){
+    #stop()
     syn_i <- unlist(strsplit(x = syn_i,split = ";_"))
     
     
-    if(length(syn_i)>1){
+    if(length(syn_i)>0){
       
       
       for(s in 1:length(syn_i)){
@@ -149,7 +148,7 @@ rm(i,name_i,s,syn_i,to_correct)
 
 # see how many we got
 
-to_correct <- setdiff(x = combined_species_to_check,y =   tree$tip.label)# well, that got ~ 30
+to_correct <- setdiff(x = combined_species_to_check,y =   tree$tip.label)# well, that got ~ half
 
 ####################################~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #try taxize
@@ -170,10 +169,12 @@ for(i in 1:length(unique(itis_syns_df$.id))){
   bad_names_i <- unique(na.omit(c(itis_syns_df$acc_name[which(itis_syns_df$.id==good_name_i)],itis_syns_df$syn_name[which(itis_syns_df$.id==good_name_i)])))
   
   for(s in 1:length(bad_names_i)){
-    
-    if(length(grep(pattern = gsub(pattern = " ",replacement = "_",x = bad_names_i[s]),x = tree$tip.label))>0){
+          
+        
       
-      tree$tip.label[grep(pattern = gsub(pattern = " ",replacement = "_",x = bad_names_i[s]),tree$tip.label)] <- good_name_i
+      if(length(which(tree$tip.label == gsub(pattern = " ",replacement = "_",x = bad_names_i[s],)))>0){
+      
+      tree$tip.label[which(tree$tip.label == gsub(pattern = " ",replacement = "_",x = bad_names_i[s]))] <- good_name_i
       
     }
     
@@ -186,7 +187,7 @@ for(i in 1:length(unique(itis_syns_df$.id))){
 
 # see how many we got
 
-to_correct <- setdiff(x = combined_species_to_check,y =   tree$tip.label)# well, that got ~ 60
+to_correct <- setdiff(x = combined_species_to_check,y =   tree$tip.label)# well, that got a few
 #skipping col because they limit the number of queries...which means they're basically useless here
 
 to_correct  
@@ -206,7 +207,8 @@ for(i in 1: nrow(name_corrections)){
   name_to_replace <- gsub(pattern = " ",replacement = "_",x = name_corrections$new_name_phylo[i])
   new_name <- gsub(pattern = " ",replacement = "_",x = name_corrections$bl_name[i])
   
-  if(!is.na(name_to_replace)){
+  if(!is.na(name_to_replace) & name_to_replace !=""){
+    
     tree$tip.label[which(tree$tip.label==name_to_replace)] <- new_name
   }
   
@@ -216,9 +218,7 @@ for(i in 1: nrow(name_corrections)){
 
 to_correct <- setdiff(x = combined_species_to_check,y =   tree$tip.label)# well, that got ~ 60
 
-name_corrections[which(name_corrections$bl_name %in% to_correct),] #all remaining species are either extinct or represent recent taxonomic revisions (and one description).
-
-
+name_corrections[which(name_corrections$bl_name %in% to_correct),] #all remaining species are either extinct or represent recent taxonomic revisions or new descriptions.
 
 
 name_translator <- cbind(tree1$tip.label,tree$tip.label)

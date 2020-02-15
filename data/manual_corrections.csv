@@ -1,234 +1,567 @@
 bl_name,new_name_phylo,new_name_db,notes
-Anthornis_melanocephala,NA,NA,extinct
-Apteryx_rowi,NA,NA,
-Ardenna_bulleri,Puffinus bulleri,NA,
-Ardenna_carneipes,Puffinus carneipes,NA,
-Ardenna_gravis,Puffinus_gravis,NA,
-Ardenna_grisea,Puffinus_griseus,NA,
-Ardenna_pacifica,Puffinus_pacificus,NA,
-Ardenna_tenuirostris,Puffinus_tenuirostris,NA,
-Bowdleria_rufescens,NA,NA,extinct
-Cabalus_modestus,NA,NA,extinct
-Calidris_pugnax,Philomachus pugnax,NA,
-Calonectris_borealis,NA,NA,former subspecies
-Chaetoptila_angustipluma,NA,NA,extinct
-Chalcites_lucidus,Chrysococcyx lucidus,NA,
-Charadrius_aquilonius,NA,NA,former subspecies
-Charadrius_nivosus,NA,NA,former subspecies
-Chasiempis_ibidis,NA,NA,former subspecies
-Chasiempis_sclateri,NA,NA,former subspecies
-Chenonetta_finschi,NA,NA,extinct
-Chlidonias_albostriatus,Sterna albostriata,NA,
-Chloridops_kona,NA,NA,extinct
-Circus_hudsonius,NA,NA,former subspecies
-Ciridops_anna,NA,NA,extinct
-Coenocorypha_barrierensis,NA,NA,extinct
-Conuropsis_carolinensis,NA,NA,extinct
-Coturnix_novaezelandiae,NA,NA,extinct
-Drepanis_funerea,NA,NA,extinct
-Drepanis_pacifica,NA,NA,extinct
-Dryobates_pubescens,Picoides pubescens,NA,
-Dysmorodrepanis_munroi,NA,NA,extinct
-Ectopistes_migratorius,NA,NA,extinct
-Fregetta_maoriana,Oceanites maorianus,NA,
-Gallinago_delicata,NA,NA,former subspecies
-Gallinula_galeata,NA,NA,former subspecies
-Hemignathus_ellisianus,NA,NA,extinct
-Hemignathus_obscurus,NA,NA,extinct
-Hemignathus_sagittirostris,NA,NA,extinct
-Hemiphaga_chathamensis,NA,NA,former subspecies
-Heteralocha_acutirostris,NA,NA,extinct
-Hydrobates_castro,Oceanodroma_castro,NA,
-Hydrobates_tristrami,Oceanodroma_tristrami,NA,
-Hylatomus_pileatus,Dryocopus_pileatus,NA,
-Hypotaenidia_dieffenbachii,NA,NA,extinct
-Ixobrychus_novaezelandiae,NA,NA,extinct
-Larus_smithsonianus,NA,NA,former subspecies
-Leuconotopicus_borealis,Picoides_borealis,NA,
-Leuconotopicus_villosus,Picoides_villosus,NA,
-Mareca_penelope,Anas_penelope,NA,
-Mareca_strepera,Anas_strepera,NA,
-Melanitta_americana,NA,NA,former subspecies
-Melanitta_deglandi,NA,NA,former subspecies
-Mergus_australis,NA,NA,extinct
-Moho_apicalis,NA,NA,extinct
-Moho_bishopi,NA,NA,extinct
-Moho_braccatus,NA,NA,extinct
-Moho_nobilis,NA,NA,extinct
-Myadestes_myadestinus,NA,NA,extinct
-Myadestes_woahensis,NA,NA,extinct
-Paroreomyza_flammea,NA,NA,extinct
-Pinguinus_impennis,NA,NA,extinct
-Porphyrio_mantelli,NA,NA,extinct
-Pterodroma_deserta,NA,NA,former subspecies
-Pterodroma_gouldi,NA,NA,former subspecies
-Puffinus_elegans,NA,NA,former subspecies
-Rallus_crepitans,NA,NA,former subspecies
-Rhodacanthis_flaviceps,NA,NA,extinct
-Rhodacanthis_palmeri,NA,NA,extinct
-Sceloglaux_albifacies,NA,NA,extinct
-Spatula_clypeata,Anas_clypeata,NA,
-Spatula_discors,Anas_discors,NA,
-Spatula_querquedula,Anas_querquedula,NA,
-Spatula_rhynchotis,Anas_rhynchotis,NA,
-Spilopelia_chinensis,Stigmatopelia_chinensis,NA,
-Tribonyx_hodgenorum,NA,NA,extinct
-Turnagra_capensis,NA,NA,extinct
-Turnagra_tanagra,NA,NA,extinct
-Vanellus_novaehollandiae,NA,NA,former subspecies
-Vermivora_cyanoptera,Vermivora_pinus,NA,
-Xenicus_longipes,NA,NA,extinct
-Zapornia_pusilla,Porzana_pusilla,NA,
-Zapornia_sandwichensis,NA,NA,extinct
-Zapornia_tabuensis,Porzana_tabuensis,NA,
-Aerodramus_francicus,NA,NA,former subspecies
-Aerodramus_spodiopygius,Collocalia_spodiopygia,NA,
-Aerodramus_terraereginae,Collocalia_terraereginae,NA,
-Aerodramus_vanikorensis,Collocalia_vanikorensis,NA,
-Alectroenas_nitidissimus,NA,NA,extinct
-Alopecoenas_ferrugineus,NA,NA,extinct
-Alopochen_kervazoi,NA,NA,extinct
-Alopochen_mauritiana,NA,NA,extinct
-Amaurornis_cinerea,Porzana_cinerea,NA,
-Amazilia_sapphirina,Hylocharis_sapphirina,NA,
-Anas_theodori,NA,NA,extinct
-Antigone_antigone,Grus_antigone,NA,
-Aphanapteryx_bonasia,NA,NA,extinct
-Aramides_cajaneus,Aramides_cajanea,NA,
-Aratinga_nenday,Nandayus_nenday,NA,
-Ardea_plumifera,NA,NA,former subspecies
-Ardenna_creatopus,Puffinus_creatopus,NA,
-Athene_superciliaris,Ninox_superciliaris,NA,
-Bucorvus_leadbeateri,Bucorvus_cafer,NA,
-Buteo_trizonatus,NA,NA,former subspecies
-Buteogallus_coronatus,Harpyhaliaetus_coronatus,NA,
-Buteogallus_solitarius,Harpyhaliaetus_solitarius,NA,
-Calherodius_leuconotus,Gorsachius_leuconotus,NA,
-Calidris_falcinellus,Limicola_falcinellus,NA,
-Calidris_subruficollis,Tryngites_subruficollis,NA,
-Calidris_virgata,Aphriza_virgata,NA,
-Celeus_ochraceus,NA,NA,former subspecies
-Celeus_tinnunculus,NA,NA,former subspecies
-Ceuthmochares_australis,NA,NA,former subspecies
-Ceyx_azureus,Alcedo_azurea,NA,
-Chalcites_basalis,Chrysococcyx_basalis,NA,
-Chalcites_minutillus,Chrysococcyx_minutillus,NA,
-Chalcites_osculans,Chrysococcyx_osculans,NA,
-Chalcophaps_longirostris,NA,NA,former subspecies
-Charadrius_bifrontatus,NA,NA,former subspecies
-Ciconia_microscelis,NA,NA,former subspecies
-Clanga_pomarina,NA,NA,former subspecies
-Claravis_geoffroyi,Claravis_godefrida,NA,
-Colaptes_campestroides,NA,NA,former subspecies
-Colaptes_melanolaimus,NA,NA,former subspecies
-Columba_thiriouxi,NA,NA,extinct
-Coracias_naevius,Coracias_naevia,NA,
-Corythornis_cristatus,Alcedo_cristata,NA,
-Corythornis_vintsioides,Alcedo_vintsioides,NA,
-Coua_olivaceiceps,NA,NA,former subspecies
-Coua_pyropyga,NA,NA,former subspecies
-Cyclopsitta_coxeni,NA,NA,former subspecies
-Dendroperdix_sephaena,Francolinus_sephaena,NA,
-Dendropicos_griseocephalus,Mesopicos_griseocephalus,NA,
-Dendropicos_namaquus,Thripias_namaquus,NA,
-Diaphorapteryx_hawkinsi,NA,NA,extinct
-Diopsittaca_cumanensis,NA,NA,former subspecies
-Dryolimnas_augusti,NA,NA,extinct
-Eclectus_infectus,NA,NA,extinct
-Eupsittula_aurea,Aratinga_aurea,NA,
-Eurostopodus_exul,NA,NA,former subspecies
-Falco_duboisi,NA,NA,extinct
-Falco_ruficollis,NA,NA,former subspecies
-Fregilupus_varius,NA,NA,extinct
-Fulica_newtonii,NA,NA,extinct
-Gallirallus_lafresnayanus,NA,NA,extinct
-Gelochelidon_macrotarsa,NA,NA,former subspecies
-Geophaps_ferruginea,NA,NA,former subspecies
-Geranoaetus_albicaudatus,Buteo_albicaudatus,NA,
-Glaucidium_tucumanum,NA,NA,former subspecies
-Guttera_edouardi,NA,NA,former subspecies
-Hapalocrex_flaviventer,Porzana_flaviventer,NA,
-Heterotetrax_rueppelii,Eupodotis_rueppellii,NA,
-Heterotetrax_vigorsii,Eupodotis_vigorsii,NA,
-Hydrobates_hornbyi,Oceanodroma_hornbyi,NA,
-Hydrobates_markhami,Oceanodroma_markhami,NA,
-Hydrobates_matsudairae,Oceanodroma_matsudairae,NA,
-Hydrobates_tethys,Oceanodroma_tethys,NA,
-Hylatomus_galeatus,Dryocopus_galeatus,NA,
-Hylatomus_lineatus,Dryocopus_lineatus,NA,
-Hylatomus_schulzii,Dryocopus_schulzi,NA,
-Icterus_pyrrhopterus,NA,NA,former subspecies
-Ixobrychus_dubius,NA,NA,former subspecies
-Leptoptilos_crumenifer,Leptoptilos_crumeniferus,NA,
-Lophoceros_alboterminatus,Tockus_alboterminatus,NA,
-Lophoceros_bradfieldi,Tockus_bradfieldi,NA,
-Lophoceros_nasutus,Tockus_nasutus,NA,
-Lophopsittacus_bensoni,NA,NA,extinct
-Lophopsittacus_mauritianus,NA,NA,extinct
-Mareca_sibilatrix,Anas_sibilatrix,NA,
-Mascarenotus_grucheti,NA,NA,extinct
-Mascarenotus_sauzieri,NA,NA,extinct
-Mascarinus_mascarin,NA,NA,extinct
-Megaloprepia_magnifica,Ptilinopus_magnificus,NA,
-Mentocrex_beankaensis,NA,NA,former subspecies
-Mentocrex_kioloides,Canirallus_kioloides,NA,
-Myiopsitta_luchsi,NA,NA,former subspecies
-Nesoenas_cicur,NA,NA,extinct
-Nesoenas_picturatus,Nesoenas_picturata,NA,
-Nycticorax_duboisi,NA,NA,extinct
-Nycticorax_mauritianus,NA,NA,extinct
-Ortalis_araucuan,NA,NA,former subspecies
-Ortalis_squamata,NA,NA,former subspecies
-Oxyura_ferruginea,NA,NA,former subspecies
-Parabuteo_leucorrhous,Buteo_leucorrhous,NA,
-Patagioenas_albilinea,NA,NA,former subspecies
-Patagioenas_albipennis,NA,NA,former subspecies
-Peltohyas_australis,Charadrius_australis,NA,
-Phalacrocorax_bougainvilliorum,Phalacrocorax_bougainvillii,NA,
-Phalcoboenus_chimango,Milvago_chimango,NA,
-Pionus_reichenowi,NA,NA,former subspecies
-Pipile_grayi,NA,NA,former subspecies
-Podiceps_juninensis,NA,NA,former subspecies
-Porphyrio_caerulescens,NA,NA,extinct
-Porphyrio_kukwiedei,NA,NA,extinct
-Psephotellus_pulcherrimus,NA,NA,extinct
-Psephotellus_varius,Psephotus_varius,NA,
-Pseudasthenes_humicola,Asthenes_humicola,NA,
-Pseudasthenes_steinbachi,Asthenes_steinbachi,NA,
-Pseudastur_albicollis,Leucopternis_albicollis,NA,
-Pseudocolopteryx_citreola,NA,NA,former subspecies
-Psittacara_acuticaudatus,Aratinga_acuticaudata,NA,
-Psittacara_mitratus,Aratinga_mitrata,NA,
-Ptilinopus_greyi,Ptilinopus_greyii,NA,
-Puffinus_bailloni,NA,NA,former subspecies
-Radjah_radjah,Tadorna_radjah,NA,
-Ramphastos_ariel,NA,NA,former subspecies
-Ramphastos_culminatus,NA,NA,former subspecies
-Raphus_cucullatus,NA,NA,extinct
-Rhea_tarapacensis,NA,NA,former subspecies
-Sappho_sparganurus,Sappho_sparganura,NA,
-Sarkidiornis_sylvicola,NA,NA,former subspecies
-Smutsornis_africanus,Rhinoptilus_africanus,NA,
-Spatula_cyanoptera,Anas_cyanoptera,NA,
-Spatula_hottentota,Anas_hottentota,NA,
-Spatula_platalea,Anas_platalea,NA,
-Spatula_puna,Anas_puna,NA,
-Spatula_smithii,Anas_smithii,NA,
-Spatula_versicolor,Anas_versicolor,NA,
-Stephanoxis_loddigesii,NA,NA,former subspecies
-Synoicus_adansonii,NA,NA,former subspecies
-Synoicus_chinensis,Coturnix_chinensis,NA,
-Systellura_decussata,NA,NA,former subspecies
-Thamnolaea_cinnamomeiventris,Myrmecocichla_cinnamomeiventris,NA,
-Threskiornis_moluccus,Threskiornis_molucca,NA,
-Threskiornis_solitarius,NA,NA,extinct
-Tockus_damarensis,NA,NA,former subspecies
-Treron_delalandii,NA,NA,former subspecies
-Trichoglossus_moluccanus,NA,NA,former subspecies
-Trogon_aurantius,NA,NA,former subspecies
-Turnix_nanus,NA,NA,former subspecies
-Turnix_novaecaledoniae,Turnix_varius,NA,
-Upupa_marginata,NA,NA,former subspecies
-Zanda_funerea,Calyptorhynchus_funereus,NA,
-Zapornia_olivieri,Amaurornis_olivieri,NA,
-Zentrygon_frenata,Geotrygon_frenata,NA,
+Accipiter_hiogaster,,,taxonomic issues
+Accipiter_sylvestris,,,taxonomic issues
+Actenoides_capucinus,,,taxonomic issues
+Actenoides_excelsus,,,taxonomic issues
+Actenoides_regalis,,,taxonomic issues
+Aegotheles_affinis,,,taxonomic issues
+Aerodramus_brevirostris,Collocalia_brevirostris,,
+Aerodramus_fuciphagus,Collocalia_fuciphaga,,
+Aerodramus_leucophaeus,Collocalia_leucophaea,,
+Aerodramus_spodiopygius,Collocalia_spodiopygia,,
+Aerodramus_terraereginae,Collocalia_terraereginae,,
+Aerodramus_vanikorensis,Collocalia_vanikorensis,,
+Afrotis_afraoides,Eupodotis_afraoides,,
+Alcedo_peninsulae,,,taxonomic issues
+Alectroenas_nitidissimus,,,extinct
+Alethe_castanea,,,taxonomic issues
+Alopecoenas_beccarii,,,taxonomic issues
+Alopecoenas_ferrugineus,,,extinct
+Alopecoenas_johannae,,,taxonomic issues
+Alopecoenas_salamonis,,,extinct
+Alopochen_kervazoi,,,extinct
+Alopochen_mauritiana,,,extinct
+Amazilia_bartletti,,,taxonomic issues
+Amazilia_cupreicauda,,,taxonomic issues
+Amazilia_wagneri,,,taxonomic issues
+Amazona_bodini,,,taxonomic issues
+Amazona_diadema,,,taxonomic issues
+Amazona_guatemalae,,,taxonomic issues
+Amazona_lilacina,,,taxonomic issues
+Amazona_martinicana,,,extinct
+Amazona_violacea,,,extinct
+Anas_albogularis,,,taxonomic issues
+Anas_marecula,,,extinct
+Anas_poecilorhyncha,Anas_poecilorhyncha,,
+Anas_theodori,,,extinct
+Anthornis_melanocephala,,,extinct
+Anthracothorax_aurulentus,,,taxonomic issues
+Antrostomus_vociferus,Caprimulgus_vociferus,,
+Aphanapteryx_bonasia,,,extinct
+Aphelocoma_wollweberi,,,taxonomic issues
+Aplonis_corvina,,,extinct
+Aplonis_fusca,,,extinct
+Apteryx_rowi,,,taxonomic issues
+Ara_tricolor,,,extinct
+Aratinga_maculata,,,taxonomic issues
+Arborophila_graydoni,,,taxonomic issues
+Arborophila_tonkinensis,,,taxonomic issues
+Ardea_brachyrhyncha,,,taxonomic issues
+Ardea_intermedia,Mesophoyx_intermedia,,
+Ardea_plumifera,,,taxonomic issues
+Atlapetes_blancae,,,taxonomic issues
+Aulacorhynchus_albivitta,,,taxonomic issues
+Aulacorhynchus_atrogularis,,,taxonomic issues
+Aulacorhynchus_caeruleogularis,,,taxonomic issues
+Aulacorhynchus_calorhynchus,,,taxonomic issues
+Aulacorhynchus_cyanolaemus,,,taxonomic issues
+Aulacorhynchus_wagleri,,,taxonomic issues
+Aulacorhynchus_whitelianus,,,taxonomic issues
+Automolus_lammi,,,taxonomic issues
+Automolus_rubiginosus,Automolus_rubiginosus,,
+Bambusicola_sonorivox,,,taxonomic issues
+Batis_erlangeri,,,taxonomic issues
+Bowdleria_rufescens,,,extinct
+Buceros_mindanensis,,,taxonomic issues
+Burhinus_indicus,,,taxonomic issues
+Buteo_japonicus,,,taxonomic issues
+Buteo_plagiatus,,,taxonomic issues
+Buteo_refectus,,,taxonomic issues
+Buteo_rufinus,Buteo_rufinus,,
+Buteo_trizonatus,,,former subspecies
+Bycanistes_sharpii,,,former subspecies
+Cabalus_modestus,,,extinct
+Cacomantis_aeruginosus,,,taxonomic issues
+Calonectris_borealis,,,former subspecies
+Caloramphus_fuliginosus,,,taxonomic issues
+Caloramphus_hayii,,,taxonomic issues
+Campephilus_splendens,,,taxonomic issues
+Campethera_taeniolaema,,,taxonomic issues
+Camptorhynchus_labradorius,,,extinct
+Capito_fitzpatricki,,,taxonomic issues
+Caprimulgus_andamanicus,,,taxonomic issues
+Caprimulgus_jotaka,,,taxonomic issues
+Caprimulgus_phalaena,,,taxonomic issues
+Caracara_lutosa,,,extinct
+Celeus_occidentalis,,,taxonomic issues
+Celeus_ochraceus,,,former subspecies
+Celeus_tinnunculus,,,former subspecies
+Ceuthmochares_australis,,,former subspecies
+Ceyx_argentatus,Alcedo_argentata,,
+Ceyx_cajeli,,,taxonomic issues
+Ceyx_collectoris,,,taxonomic issues
+Ceyx_dispar,,,taxonomic issues
+Ceyx_flumenicola,,,taxonomic issues
+Ceyx_gentianus,,,taxonomic issues
+Ceyx_margarethae,,,taxonomic issues
+Ceyx_meeki,,,taxonomic issues
+Ceyx_mindanensis,,,taxonomic issues
+Ceyx_mulcatus,,,taxonomic issues
+Ceyx_nigrirostris,,,taxonomic issues
+Ceyx_nigromaxilla,,,taxonomic issues
+Ceyx_sacerdotis,,,taxonomic issues
+Ceyx_sangirensis,,,taxonomic issues
+Ceyx_solitarius,,,taxonomic issues
+Ceyx_wallacii,,,taxonomic issues
+Chaetoptila_angustipluma,,,extinct
+Chalcites_minutillus,Chrysococcyx_minutillus,,
+Chalcophaps_longirostris,,,taxonomic issues
+Charadrius_aquilonius,,,taxonomic issues
+Charadrius_bifrontatus,,,taxonomic issues
+Charadrius_dealbatus,,,taxonomic issues
+Charadrius_nivosus,,,taxonomic issues
+Charmosyna_stellae,,,taxonomic issues
+Chasiempis_sandwichensis,Chasiempis_sandwichensis,,
+Chasiempis_sclateri,,,taxonomic issues
+Chenonetta_finschi,,,extinct
+Chlamydotis_macqueenii,,,taxonomic issues
+Chloridops_kona,,,extinct
+Chlorostilbon_bracei,,,extinct
+Chlorostilbon_elegans,,,extinct
+Chrysocolaptes_erythrocephalus,,,taxonomic issues
+Chrysocolaptes_guttacristatus,,,taxonomic issues
+Chrysocolaptes_haematribon,,,taxonomic issues
+Chrysocolaptes_stricklandi,,,taxonomic issues
+Chrysocolaptes_strictus,,,taxonomic issues
+Chrysocolaptes_xanthocephalus,,,taxonomic issues
+Chrysophlegma_humii,,,taxonomic issues
+Chrysophlegma_mentale,Picus_mentalis,,
+Chrysophlegma_miniaceum,Picus_mineaceus,,
+Ciconia_microscelis,,,taxonomic issues
+Circus_hudsonius,,,taxonomic issues
+Circus_spilothorax,,,taxonomic issues
+Ciridops_anna,,,extinct
+Cissa_jefferyi,,,taxonomic issues
+Cittura_sanghirensis,,,taxonomic issues
+Coccyzus_bahamensis,,,taxonomic issues
+Coeligena_albicaudata,,,taxonomic issues
+Coeligena_conradii,,,taxonomic issues
+Coeligena_consita,,,taxonomic issues
+Coeligena_dichroura,,,taxonomic issues
+Coeligena_eisenmanni,,,taxonomic issues
+Coeligena_eos,,,taxonomic issues
+Coeligena_inca,,,taxonomic issues
+Coeligena_osculans,,,taxonomic issues
+Coenocorypha_barrierensis,,,extinct
+Colaptes_aeruginosus,,,taxonomic issues
+Colaptes_atriceps,,,taxonomic issues
+Colaptes_cafer,,,taxonomic issues
+Colaptes_campestroides,,,taxonomic issues
+Colaptes_cinereicapillus,,,taxonomic issues
+Colaptes_melanolaimus,,,taxonomic issues
+Colaptes_mexicanoides,,,taxonomic issues
+Columba_jouyi,,,extinct
+Columba_thiriouxi,,,extinct
+Conuropsis_carolinensis,,,extinct
+Coracias_affinis,,,taxonomic issues
+Coracopsis_barklyi,,,taxonomic issues
+Coracopsis_sibilans,,,taxonomic issues
+Corythaixoides_leopoldi,,,taxonomic issues
+Corythornis_cristatus,Alcedo_cristata,,
+Corythornis_nais,,,taxonomic issues
+Corythornis_thomensis,,,taxonomic issues
+Coturnix_novaezelandiae,,,extinct
+Coua_delalandei,,,extinct
+Coua_olivaceiceps,,,former subspecies
+Coua_pyropyga,,,former subspecies
+Crax_pinima,,,taxonomic issues
+Crypturellus_occidentalis,,,taxonomic issues
+Cyanoramphus_ulietanus,,,extinct
+Cyanoramphus_zealandicus,,,extinct
+Cyclopsitta_amabilis,,,taxonomic issues
+Cyclopsitta_coxeni,,,taxonomic issues
+Cyclopsitta_melanogenia,,,taxonomic issues
+Cyclopsitta_nigrifrons,,,taxonomic issues
+Cynanthus_doubledayi,,,taxonomic issues
+Cynanthus_lawrencei,,,taxonomic issues
+Cyrtonyx_sallei,,,taxonomic issues
+Dendrocopos_analis,,,taxonomic issues
+Dendrocopos_owstoni,,,taxonomic issues
+Dendroica_dominica,,,taxonomic issues
+Dendropicos_elliotii,Mesopicos_elliotii,,
+Dendropicos_goertae,Mesopicos_goertae,,
+Dendropicos_johnstoni,,,taxonomic issues
+Diaphorapteryx_hawkinsi,,,extinct
+Dicrurus_menagei,,,taxonomic issues
+Dinopium_everetti,,,taxonomic issues
+Dinopium_psarodes,,,taxonomic issues
+Diopsittaca_cumanensis,,,taxonomic issues
+Drepanis_funerea,,,extinct
+Drepanis_pacifica,,,extinct
+Dromaius_baudinianus,,,extinct
+Dromaius_minor,,,extinct
+Dryobates_cathpharius,Dendrocopos_cathpharius,,
+Dryobates_pernyii,,,taxonomic issues
+Dryolimnas_augusti,,,extinct
+Ducula_cuprea,,,taxonomic issues
+Ducula_geelvinkiana,,,taxonomic issues
+Ducula_neglecta,,,taxonomic issues
+Ducula_obiensis,,,taxonomic issues
+Ducula_oenothorax,,,taxonomic issues
+Ducula_salvadorii,,,taxonomic issues
+Dysmorodrepanis_munroi,,,extinct
+Eclectus_infectus,,,extinct
+Ectopistes_migratorius,,,extinct
+Eriocnemis_sapphiropygia,,,taxonomic issues
+Eubucco_aurantiicollis,,,taxonomic issues
+Eubucco_glaucogularis,,,taxonomic issues
+Eubucco_steerii,,,taxonomic issues
+Eupsittula_astec,,,taxonomic issues
+Eupsittula_nana,Aratinga_nana,,
+Eurostopodus_exul,,,taxonomic issues
+Eurostopodus_nigripennis,,,taxonomic issues
+Falcipennis_franklinii,,,taxonomic issues
+Falco_duboisi,,,extinct
+Falco_ruficollis,,,taxonomic issues
+Formicivora_grantsaui,,,newly described
+Forpus_spengeli,,,taxonomic issues
+Fregilupus_varius,,,extinct
+Fulica_newtonii,,,extinct
+Galbula_chalcocephala,,,taxonomic issues
+Gallinago_delicata,,,taxonomic issues
+Gallinula_galeata,,,taxonomic issues
+Gallirallus_lafresnayanus,,,extinct
+Gelochelidon_macrotarsa,,,taxonomic issues
+Geoffroyus_hyacinthinus,,,taxonomic issues
+Geophaps_ferruginea,,,taxonomic issues
+Geotrygon_leucometopia,,,taxonomic issues
+Geotrygon_purpurata,,,taxonomic issues
+Gerygone_insularis,,,extinct
+Glaucidium_cobanense,,,taxonomic issues
+Glaucidium_hoskinsii,,,taxonomic issues
+Glaucidium_tucumanum,,,taxonomic issues
+Goura_sclaterii,,,taxonomic issues
+Grallaricula_cumanensis,,,taxonomic issues
+Guttera_edouardi,,,taxonomic issues
+Guttera_verreauxi,,,taxonomic issues
+Gymnobucco_cinereiceps,,,taxonomic issues
+Gymnobucco_vernayi,,,taxonomic issues
+Gymnophaps_stalkeri,,,taxonomic issues
+Haematopus_meadewaldoi,,,extinct
+Halcyon_gularis,,,taxonomic issues
+Heliangelus_clarisse,,,taxonomic issues
+Heliangelus_spencei,,,taxonomic issues
+Heliangelus_zusii,,,taxonomic issues
+Heliodoxa_whitelyana,,,taxonomic issues
+Hemicircus_sordidus,,,taxonomic issues
+Hemignathus_ellisianus,,,extinct
+Hemignathus_obscurus,,,extinct
+Hemignathus_sagittirostris,,,extinct
+Hemiphaga_chathamensis,,,taxonomic issues
+Heteralocha_acutirostris,,,extinct
+Heterotetrax_rueppelii,Eupodotis_rueppellii,,
+Hierococcyx_bocki,,,taxonomic issues
+Hierococcyx_fugax,Cuculus_fugax,,
+Hierococcyx_hyperythrus,,,taxonomic issues
+Hierococcyx_nisicolor,,,taxonomic issues
+Hierococcyx_pectoralis,,,taxonomic issues
+Hierococcyx_sparverioides,Cuculus_sparverioides,,
+Horizocerus_albocristatus,Tropicranus_albocristatus,,
+Horizocerus_cassini,,,taxonomic issues
+Horizocerus_granti,,,taxonomic issues
+Horizocerus_hartlaubi,Tockus_hartlaubi,,
+Hydrobates_macrodactylus,,,extinct
+Hylatomus_fuscipennis,,,taxonomic issues
+Hylatomus_lineatus,Dryocopus_lineatus,,
+Hylatomus_schulzii,Dryocopus_schulzi,,
+Hypnelus_bicinctus,,,taxonomic issues
+Hypotaenidia_dieffenbachii,,,extinct
+Hypotaenidia_immaculata,,,taxonomic issues
+Hypotaenidia_pacifica,,,extinct
+Hypotaenidia_poeciloptera,,,extinct
+Hypotaenidia_tertia,,,taxonomic issues
+Hypotaenidia_woodfordi,Nesoclopeus_woodfordi,,
+Icterus_dominicensis,Icterus_dominicensis,,
+Icterus_northropi,,,taxonomic issues
+Icterus_portoricensis,,,taxonomic issues
+Icterus_pyrrhopterus,,,taxonomic issues
+Ixobrychus_dubius,,,taxonomic issues
+Ixobrychus_novaezelandiae,,,extinct
+Lacedo_melanops,,,taxonomic issues
+Lampornis_cinereicauda,,,taxonomic issues
+Larus_smithsonianus,,,taxonomic issues
+Lophoceros_fasciatus,Tockus_fasciatus,,
+Lophoceros_semifasciatus,,,taxonomic issues
+Lophopsittacus_bensoni,,,extinct
+Lophopsittacus_mauritianus,,,extinct
+Lophornis_verreauxii,,,taxonomic issues
+Lophura_pyronota,,,taxonomic issues
+Lophura_rufa,,,taxonomic issues
+Lybius_leucogaster,,,taxonomic issues
+Lybius_senex,,,taxonomic issues
+Malacoptila_minor,,,taxonomic issues
+Mascarenotus_grucheti,,,extinct
+Mascarenotus_sauzieri,,,extinct
+Mascarinus_mascarin,,,extinct
+Megascops_vermiculatus,,,taxonomic issues
+Meiglyptes_grammithorax,,,taxonomic issues
+Melanitta_americana,,,taxonomic issues
+Melanitta_deglandi,,,taxonomic issues
+Melanitta_fusca,Melanitta_fusca,,
+Mentocrex_beankaensis,,,taxonomic issues
+Mergus_australis,,,extinct
+Merops_americanus,,,taxonomic issues
+Merops_cyanophrys,,,taxonomic issues
+Merops_lafresnayii,,,taxonomic issues
+Merops_mentalis,,,taxonomic issues
+Merops_viridissimus,,,taxonomic issues
+Microcarbo_pygmaeus,Phalacrocorax_pygmeus,,
+Microgoura_meeki,,,extinct
+Moho_apicalis,,,extinct
+Moho_bishopi,,,extinct
+Moho_braccatus,,,extinct
+Moho_nobilis,,,extinct
+Momotus_bahamensis,,,taxonomic issues
+Momotus_coeruliceps,,,taxonomic issues
+Momotus_lessonii,,,taxonomic issues
+Momotus_subrufescens,,,taxonomic issues
+Mulleripicus_fuliginosus,,,taxonomic issues
+Myadestes_myadestinus,,,extinct
+Myadestes_woahensis,,,extinct
+Myiagra_freycineti,,,taxonomic issues
+Myiopsitta_luchsi,,,taxonomic issues
+Myrmeciza_laemosticta,Myrmeciza_laemosticta,,
+Nesoenas_cicur,,,extinct
+Nesoenas_picturatus,Nesoenas_picturata,,
+Nestor_productus,,,extinct
+Ninox_forbesi,,,taxonomic issues
+Ninox_granti,,,taxonomic issues
+Ninox_hantu,,,taxonomic issues
+Ninox_hypogramma,,,taxonomic issues
+Ninox_japonica,,,taxonomic issues
+Ninox_leucopsis,,,taxonomic issues
+Ninox_leventisi,,,recent species
+Ninox_malaitae,,,taxonomic issues
+Ninox_mindorensis,,,taxonomic issues
+Ninox_obscura,,,taxonomic issues
+Ninox_randi,,,taxonomic issues
+Ninox_reyi,,,taxonomic issues
+Ninox_roseoaxillaris,,,taxonomic issues
+Ninox_rumseyi,,,recent species
+Ninox_spilocephala,,,taxonomic issues
+Ninox_spilonotus,,,taxonomic issues
+Nisaetus_pinskeri,,,taxonomic issues
+Notharchus_subtectus,,,taxonomic issues
+Nycticorax_duboisi,,,extinct
+Nycticorax_mauritianus,,,extinct
+Oceanites_pincoyae,,,recent species
+Oenanthe_heuglini,,,taxonomic issues
+Ophrysia_superciliosa,,,extinct
+Oreonympha_albolimbata,,,taxonomic issues
+Oreotrochilus_stolzmanni,,,taxonomic issues
+Ortalis_araucuan,,,taxonomic issues
+Ortalis_columbiana,,,taxonomic issues
+Ortalis_squamata,,,taxonomic issues
+Otidiphaps_aruensis,,,taxonomic issues
+Otidiphaps_cervicalis,,,taxonomic issues
+Otidiphaps_insularis,,,taxonomic issues
+Otus_everetti,,,taxonomic issues
+Otus_jolandae,,,taxonomic issues
+Otus_mendeni,,,taxonomic issues
+Otus_nigrorum,,,taxonomic issues
+Otus_pamelae,,,taxonomic issues
+Otus_socotranus,,,taxonomic issues
+Otus_sulaensis,,,taxonomic issues
+Otus_tempestatis,,,taxonomic issues
+Oxypogon_cyanolaemus,,,taxonomic issues
+Oxypogon_lindenii,,,taxonomic issues
+Oxypogon_stuebelii,,,taxonomic issues
+Oxyura_ferruginea,,,taxonomic issues
+Pareudiastes_pacificus,,,extinct
+Paroaria_gularis,Paroaria_gularis,,
+Paroreomyza_flammea,,,extinct
+Passer_zarudnyi,,,taxonomic issues
+Patagioenas_albilinea,,,taxonomic issues
+Patagioenas_albipennis,,,taxonomic issues
+Pauxi_koepckeae,,,taxonomic issues
+Pernis_steerei,,,taxonomic issues
+Phaenicophaeus_oeneicaudus,,,taxonomic issues
+Phaethornis_baroni,,,taxonomic issues
+Phaethornis_longuemareus,Phaethornis_longuemareus,,
+Phaethornis_mexicanus,,,taxonomic issues
+Phaethornis_porcullae,,,taxonomic issues
+Phapitreron_brevirostris,,,taxonomic issues
+Phapitreron_frontalis,,,taxonomic issues
+Phapitreron_maculipectus,,,taxonomic issues
+Phapitreron_nigrorum,,,taxonomic issues
+Phibalura_boliviana,,,taxonomic issues
+Phodilus_assimilis,,,taxonomic issues
+Piaya_mexicana,,,taxonomic issues
+Picoides_funebris,,,taxonomic issues
+Picus_dedemi,,,taxonomic issues
+Picus_guerini,,,taxonomic issues
+Picus_sharpei,,,taxonomic issues
+Pinguinus_impennis,,,extinct
+Pionites_xanthomerius,,,taxonomic issues
+Pionites_xanthurus,,,taxonomic issues
+Pionus_reichenowi,,,taxonomic issues
+Pionus_seniloides,,,taxonomic issues
+Pipile_grayi,,,taxonomic issues
+Pitta_guajana,Pitta_guajana,,
+Pitta_schwaneri,,,taxonomic issues
+Podiceps_andinus,,,taxonomic issues
+Podiceps_juninensis,,,taxonomic issues
+Podilymbus_gigas,,,taxonomic issues
+Pogonornis_macclounii,,,taxonomic issues
+Pogonornis_minor,,,taxonomic issues
+Pomarea_mira,,,taxonomic issues
+Pomarea_nukuhivae,,,extinct
+Pomarea_pomarea,,,extinct
+Porphyrio_albus,,,extinct
+Porphyrio_caerulescens,,,extinct
+Porphyrio_hochstetteri,Porphyrio_hochstetteri,,
+Porphyrio_kukwiedei,,,extinct
+Porphyrio_paepae,,,extinct
+Prioniturus_mindorensis,,,taxonomic issues
+Prosobonia_ellisi,,,extinct
+Prosobonia_leucoptera,,,extinct
+Psephotellus_pulcherrimus,,,extinct
+Pseudocolopteryx_citreola,,,taxonomic issues
+Psilopogon_annamensis,,,taxonomic issues
+Psilopogon_asiaticus,Megalaima_asiatica,,
+Psilopogon_auricularis,,,taxonomic issues
+Psilopogon_australis,Megalaima_australis,,
+Psilopogon_chersonesus,,,taxonomic issues
+Psilopogon_cyanotis,,,taxonomic issues
+Psilopogon_duvaucelii,,,taxonomic issues
+Psilopogon_franklinii,Megalaima_franklinii,,
+Psilopogon_malabaricus,,,taxonomic issues
+Psilopogon_oorti,Megalaima_oorti,,
+Psilopogon_rubricapillus,Megalaima_rubricapillus,,
+Psilopogon_zeylanicus,Megalaima_zeylanica,,
+Psittacara_frontatus,,,taxonomic issues
+Psittacara_holochlorus,Aratinga_holochlora,,
+Psittacara_labati,,,extinct
+Psittacella_lorentzi,,,taxonomic issues
+Psittacula_wardi,,,extinct
+Psittaculirostris_cervicalis,,,taxonomic issues
+Psittaculirostris_godmani,,,taxonomic issues
+Psittacus_timneh,,,taxonomic issues
+Psittinus_abbotti,,,taxonomic issues
+Psophia_dextralis,,,taxonomic issues
+Psophia_obscura,,,taxonomic issues
+Psophia_ochroptera,,,taxonomic issues
+Pternistis_atrifrons,,,taxonomic issues
+Pterodroma_deserta,,,taxonomic issues
+Pterodroma_gouldi,,,taxonomic issues
+Pteroglossus_erythropygius,,,taxonomic issues
+Pteroglossus_humboldti,,,taxonomic issues
+Pteroglossus_sanguineus,,,taxonomic issues
+Pteroglossus_sturmii,,,taxonomic issues
+Ptilinopus_alligator,,,taxonomic issues
+Ptilinopus_chrysogaster,,,taxonomic issues
+Ptilinopus_fasciatus,,,taxonomic issues
+Ptilinopus_gestroi,,,taxonomic issues
+Ptilinopus_hernsheimi,,,taxonomic issues
+Ptilinopus_mercierii,,,extinct
+Ptilinopus_ponapensis,,,taxonomic issues
+Ptilinopus_speciosus,,,taxonomic issues
+Ptilinopus_temminckii,,,taxonomic issues
+Puffinus_bailloni,,,taxonomic issues
+Puffinus_bannermani,,,taxonomic issues
+Puffinus_elegans,,,taxonomic issues
+Puffinus_persicus,,,taxonomic issues
+Puffinus_subalaris,,,taxonomic issues
+Pyrrhura_amazonum,,,taxonomic issues
+Pyrrhura_caeruleiceps,,,taxonomic issues
+Pyrrhura_eisenmanni,,,taxonomic issues
+Pyrrhura_emma,,,taxonomic issues
+Pyrrhura_lucianii,,,taxonomic issues
+Pyrrhura_pacifica,,,taxonomic issues
+Pyrrhura_parvifrons,,,taxonomic issues
+Pyrrhura_peruviana,,,taxonomic issues
+Pyrrhura_roseifrons,,,taxonomic issues
+Pyrrhura_snethlageae,,,taxonomic issues
+Pyrrhura_subandina,,,extinct
+Quiscalus_palustris,,,extinct
+Rallus_crepitans,,,taxonomic issues
+Rallus_indicus,,,taxonomic issues
+Rallus_obsoletus,,,taxonomic issues
+Rallus_tenuirostris,,,taxonomic issues
+Ramphastos_ariel,,,taxonomic issues
+Ramphastos_citrolaemus,,,taxonomic issues
+Ramphastos_culminatus,,,taxonomic issues
+Ramphastos_cuvieri,,,taxonomic issues
+Ramphiculus_epius,,,taxonomic issues
+Ramphiculus_fischeri,,,taxonomic issues
+Ramphiculus_mangoliensis,,,taxonomic issues
+Ramphiculus_meridionalis,,,taxonomic issues
+Ramphiculus_subgularis,,,taxonomic issues
+Raphus_cucullatus,,,extinct
+Rhea_tarapacensis,,,taxonomic issues
+Rhinopomastus_castaneiceps,Phoeniculus_castaneiceps,,
+Rhizothera_dulitensis,,,extinct
+Rhodacanthis_flaviceps,,,extinct
+Rhodacanthis_palmeri,,,extinct
+Rhodopechys_alienus,,,taxonomic issues
+Sarkidiornis_sylvicola,,,taxonomic issues
+Sceloglaux_albifacies,,,extinct
+Schistes_albogularis,,,taxonomic issues
+Scleroptila_elgonensis,,,taxonomic issues
+Scleroptila_psilolaema,Francolinus_psilolaemus,,
+Scleroptila_whytei,,,taxonomic issues
+Scytalopus_diamantinensis,,,recent species
+Scytalopus_opaca,,,taxonomic issues
+Selenidera_langsdorffii,,,taxonomic issues
+Setopagis_heterura,,,taxonomic issues
+Spilopelia_chinensis,Stigmatopelia_chinensis,,
+Spilopelia_suratensis,,,taxonomic issues
+Stactolaema_leucogrammica,,,taxonomic issues
+Stephanoxis_loddigesii,,,taxonomic issues
+Streptopelia_dusumieri,,,taxonomic issues
+Streptopelia_xanthocycla,,,taxonomic issues
+Strix_nivicolum,,,taxonomic issues
+Struthio_molybdophanes,,,taxonomic issues
+Surniculus_dicruroides,,,taxonomic issues
+Surniculus_musschenbroeki,,,taxonomic issues
+Synallaxis_beverlyae,,,taxonomic issues
+Synoicus_adansonii,,,taxonomic issues
+Synthliboramphus_scrippsi,,,taxonomic issues
+Systellura_decussata,,,taxonomic issues
+Systellura_roraimae,,,taxonomic issues
+Tachybaptus_rufolavatus,,,taxonomic issues
+Theristicus_branickii,,,taxonomic issues
+Threskiornis_solitarius,,,extinct
+Tockus_damarensis,,,taxonomic issues
+Todiramphus_pelewensis,,,taxonomic issues
+Todiramphus_reichenbachii,,,taxonomic issues
+Todiramphus_saurophagus,Todiramphus_saurophaga,,
+Todiramphus_youngi,,,taxonomic issues
+Trachylaemus_goffinii,,,taxonomic issues
+Trachylaemus_togoensis,,,taxonomic issues
+Trachyphonus_emini,,,taxonomic issues
+Treron_affinis,,,taxonomic issues
+Treron_aromaticus,,,taxonomic issues
+Treron_axillaris,,,taxonomic issues
+Treron_chloropterus,,,taxonomic issues
+Treron_delalandii,,,taxonomic issues
+Treron_griveaudi,,,taxonomic issues
+Treron_permagnus,,,taxonomic issues
+Treron_phayrei,,,taxonomic issues
+Tribonyx_hodgenorum,,,extinct
+Trichoglossus_capistratus,,,taxonomic issues
+Trichoglossus_forsteni,,,taxonomic issues
+Trichoglossus_meyeri,,,taxonomic issues
+Trichoglossus_moluccanus,,,taxonomic issues
+Trichoglossus_rosenbergii,,,taxonomic issues
+Trichoglossus_rubritorquis,,,taxonomic issues
+Trichoglossus_weberi,,,taxonomic issues
+Trogon_ambiguus,,,taxonomic issues
+Trogon_aurantius,,,taxonomic issues
+Turdus_olivaceofuscus,,,taxonomic issues
+Turnagra_capensis,,,extinct
+Turnagra_tanagra,,,extinct
+Turnix_nanus,,,taxonomic issues
+Turnix_novaecaledoniae,,,taxonomic issues
+Tyto_almae,,,recent species
+Tyto_multipunctata,,,taxonomic issues
+Upupa_marginata,,,taxonomic issues
+Urochroa_leucura,,,taxonomic issues
+Vanellus_macropterus,,,extinct
+Vanellus_novaehollandiae,,,taxonomic issues
+Willisornis_vidua,,,taxonomic issues
+Xenicus_longipes,,,extinct
+Zapornia_monasa,,,extinct
+Zapornia_nigra,,,extinct
+Zapornia_sandwichensis,,,extinct
+Zosterops_strenuus,,,extinct
