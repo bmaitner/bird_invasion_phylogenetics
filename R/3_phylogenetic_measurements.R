@@ -236,9 +236,26 @@ for(i in 1:nrow(unique(introductions[,c("Species","Site")]))){
 }#i loop
 }#p loop
 
-saveRDS(object = phy_out,file = "data/phy_metrics_output.rds")
-    
-#temp code##################
+#saveRDS(object = phy_out,file = "data/phy_metrics_output.rds")
+
+
+
+#Now, compile code by taking means across replicates
+sp_x_site <- unique(phy_out[,c('species_i',"site_i")])
+
+mean_phy_out <- NULL
+
+for( i in 1:nrow(sp_x_site)){
+species <- sp_x_site[i,]['species_i']  
+site <- sp_x_site[i,]['site_i']  
+data_i <- phy_out[which(phy_out[,"species_i"]==species & phy_out[,"site_i"]==site),]  
+mean_phy_out<-rbind(mean_phy_out,c(species,site,apply(X = data_i[,3:33],MARGIN = 2,FUN = function(x){mean(as.numeric(x))})))
+}
+
+rm(sp_x_site,species,site,data_i,i)
+saveRDS(object = phy_out,file = "data/mean_phy_metrics_output.rds")
+
+#V temp code V##################
 
     
 
