@@ -18,13 +18,18 @@ introductions <- read.csv("data/invasion_data.csv",stringsAsFactors = F)
 #cut australia data (too large an area)
 introductions<-introductions[which(introductions$Site!="A"),]
 
+#load occs to check names against
+occs <- readRDS("data/cea_occurrences.rds")
+occs$species<-as.character(occs$species)
+occs$species <- gsub(pattern = " ",replacement = "_",x = occs$species)
+
 #####################################
 
 #Check names of introduced species
   #manually corrected introduced names to birdlife checklist
 
 intro_names_to_check <- unique(introductions$Species)
-intro_names_to_check <- intro_names_to_check[which(!intro_names_to_check %in% bl_taxonomy$Scientific.name)]
+intro_names_to_check <- intro_names_to_check[which(!intro_names_to_check %in% occs$species)]
 
 #one bad name ( hybrid, drop from analysis)
 introductions<-introductions[grep(pattern = "_x_",x = introductions$Species,invert = T),]
@@ -35,7 +40,6 @@ intro_names_to_check <- intro_names_to_check[which(!intro_names_to_check %in% bl
 rm(intro_names_to_check)
 
 #all intro species names are now alright (relative to BL)
-
 
 #######################################
 
@@ -223,9 +227,25 @@ name_corrections[which(name_corrections$bl_name %in% to_correct),] #all remainin
 
 name_translator <- cbind(tree1$tip.label,tree$tip.label)
 name_translator <- as.data.frame(name_translator)
+name_translator$corrected <- as.character(name_translator$corrected)
 colnames(name_translator) <- c("original","corrected")
 saveRDS(name_translator,file = "data/name_translator.rds")
 
+#######################################
+
+#Check name of introduced species against phylo
+
+name_translator <- readRDS("data/name_translator.rds")
+name_translator$corrected <- as.character(name_translator$corrected)
+
+introductions$Species[which(!introductions$Species %in% name_translator$corrected)]
+
+name_translator$corrected[which(name_translator$original=="Anas_poecilorhyncha")] <- "Anas_poecilorhyncha"
+name_translator$corrected[which(name_translator$original=="Paroaria_gularis")] <- "Paroaria_gularis"
+name_translator$corrected[which(name_translator$original=="Pitta_guajana")] <- "Pitta_guajana"
+name_translator$corrected[which(name_translator$original=="Ramphastos_vitellinus")] <- "Ramphastos_citrolaemus"
+
+saveRDS(name_translator,file = "data/name_translator.rds")
 
 
 ######################################################################################################

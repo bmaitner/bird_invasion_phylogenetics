@@ -87,7 +87,7 @@
     trees <- list.files("data/Bird_Phylogeny/",pattern = "tree_",full.names = T)
     set.seed(2005)
     trees <- trees[sample(x = 1:length(trees),size = 100,replace = F)] #sample 100 phylos to use
-    
+  
 #calculate phylo metrics ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 phy_out <- NULL        
@@ -224,23 +224,24 @@ for(i in 1:nrow(unique(introductions[,c("Species","Site")]))){
      r_n_pd,r_n_nnd,r_n_mpd,r_n_vpd,r_n_spd,r_n_kpd,r_n_richness,
      r_e_pd,r_e_nnd,r_e_mpd,r_e_vpd,r_e_spd,r_e_kpd,r_e_richness,
      r_ne_pd,r_ne_nnd,r_ne_mpd,r_ne_vpd,r_ne_spd,r_ne_kpd,r_ne_richness,comm_r,comm_s,
-     source_cells,recipient_cells)
+     source_cells,recipient_cells,
+     recipient_e_phydist,recipient_e_species,recipient_n_phydist,recipient_n_species,recipient_ne_phydist,recipient_ne_species,
+     source_phydist,source_species)
     
   #Print output of completeness to watch for frozen process
-  cat((p/length(trees)*100),"percent of trees done \n"  )
+  cat(round(i/nrow(unique(introductions[,c("Species","Site")]))*100),"percent of species complete for", p, "of",length(trees)," of trees\n"  )
     
   
   
 }#i loop
 }#p loop
 
+saveRDS(object = phy_out,file = "data/phy_metrics_output.rds")
     
+#temp code##################
+
     
-    
-    
-    
-    
-    
+
     
     
     
