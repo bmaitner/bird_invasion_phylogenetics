@@ -146,7 +146,7 @@ for(i in 1:nrow(unique(introductions[,c("Species","Site")]))){
     
     #get a list of all species that occur in the re_cells, again limiting it to those that are established
     recipient_e_species <- unique(occs$species[which(occs$cell %in% recipient_cells & occs$origin %in% c(3))])
-    recipient_e_species <- unique(c(recipient_e_species,introductions$Species[which(introductions$Site==site_i & introductions$Failure==0)]),species_i)
+    recipient_e_species <- unique(c(recipient_e_species,introductions$Species[which(introductions$Site==site_i & introductions$Failure==0)],species_i))
     
     #get a list of all species that occur in the source_c
     recipient_ne_species <- unique(c(recipient_n_species,recipient_e_species))
@@ -237,7 +237,7 @@ for(i in 1:nrow(unique(introductions[,c("Species","Site")]))){
 }#p loop
 
 #saveRDS(object = phy_out,file = "data/phy_metrics_output.rds")
-
+#phy_out <- readRDS("data/phy_metrics_output.rds")
 
 
 #Now, compile code by taking means across replicates
@@ -253,13 +253,13 @@ mean_phy_out<-rbind(mean_phy_out,c(species,site,apply(X = data_i[,3:33],MARGIN =
 }
 
 rm(sp_x_site,species,site,data_i,i)
-saveRDS(object = phy_out,file = "data/mean_phy_metrics_output.rds")
+saveRDS(object = mean_phy_out,file = "data/mean_phy_metrics_output.rds")
 
 #V temp code V##################
 
     
 
-    
+meanout<-readRDS("data/mean_phy_metrics_output.rds")
     
     
     
