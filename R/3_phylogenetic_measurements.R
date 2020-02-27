@@ -99,6 +99,9 @@ for(p in 1:length(trees)){
     tree_p$tip.label <- as.character(tree_p_corrected$corrected)
     rm(tree_p_taxa,tree_p_corrected)
     coph_p <- cophenetic(x = tree_p)
+    write.tree(phy = tree_p,file = paste("data/bird_phylogeny_updated_names/updated_names_",  strsplit(x = trees[p],split = "/" )[[1]][length(strsplit(x = trees[p],split = "/" )[[1]])],sep = ""))
+  
+    
     
 for(i in 1:nrow(unique(introductions[,c("Species","Site")]))){
   species_i <- unique(introductions[i,c("Species","Site")])$Species
