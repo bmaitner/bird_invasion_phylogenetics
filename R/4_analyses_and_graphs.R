@@ -528,6 +528,22 @@ phylo.full_mpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_
     # source v recipient v source + recipient
     # native v establshed v native +established
 
+#natives only in recipeint
+full_vpd_s <-     glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
+full_vpd_s_r_n <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_n_vpd  +(1|site_i),data=intros,family = "binomial")
+full_vpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_vpd  + (1|site_i),data=intros,family = "binomial")
+
+#established only in recipeint
+full_vpd_s #already done
+full_vpd_s_r_e <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_e_vpd  +(1|site_i),data=intros,family = "binomial")
+full_vpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_vpd  + (1|site_i),data=intros,family = "binomial")
+
+#established + native  in recipeint
+full_vpd_s #already done
+full_vpd_s_r_ne <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_ne_vpd  +(1|site_i),data=intros,family = "binomial")
+full_vpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_vpd  + (1|site_i),data=intros,family = "binomial")
+
+
 #VPD
 
 #phy corrected
@@ -602,6 +618,22 @@ phylo.full_vpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_
 
 #SPD
 
+#natives only in recipeint
+full_spd_s <-     glmer(formula = r_success ~ s_spd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
+full_spd_s_r_n <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_n_spd  +(1|site_i),data=intros,family = "binomial")
+full_spd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_spd  + (1|site_i),data=intros,family = "binomial")
+
+#established only in recipeint
+full_spd_s #already done
+full_spd_s_r_e <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_e_spd  +(1|site_i),data=intros,family = "binomial")
+full_spd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_spd  + (1|site_i),data=intros,family = "binomial")
+
+#established + native  in recipeint
+full_spd_s #already done
+full_spd_s_r_ne <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_ne_spd  +(1|site_i),data=intros,family = "binomial")
+full_spd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_spd  + (1|site_i),data=intros,family = "binomial")
+
+
 #phy corrected
 
 #natives only in recipeint
@@ -672,6 +704,22 @@ phylo.full_spd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_
 
 
 #KPD
+
+#natives only in recipeint
+full_kpd_s <-     glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
+full_kpd_s_r_n <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_n_kpd  +(1|site_i),data=intros,family = "binomial")
+full_kpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_kpd  + (1|site_i),data=intros,family = "binomial")
+
+#established only in recipeint
+full_kpd_s #already done
+full_kpd_s_r_e <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_e_kpd  +(1|site_i),data=intros,family = "binomial")
+full_kpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_kpd  + (1|site_i),data=intros,family = "binomial")
+
+#established + native  in recipeint
+full_kpd_s #already done
+full_kpd_s_r_ne <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_ne_kpd  +(1|site_i),data=intros,family = "binomial")
+full_kpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_kpd  + (1|site_i),data=intros,family = "binomial")
+
 
 #phy corrected
 
@@ -746,29 +794,262 @@ phylo.full_kpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_
 #summarize phylogenetic models
 source("R/functions/summarize_phylo_models.R")
 phylo_model_summary <- summarize_phyl0_models(digits_to_round = 3)
+nonphylo_model_summary <- summarize_nonphylo_models(digits_to_round = 3)
+setdiff(colnames(phylo_model_summary),colnames(nonphylo_model_summary))
+setdiff(colnames(nonphylo_model_summary),colnames(phylo_model_summary))
 
 
 
 #############################################################################
 #############################################################################
 
+#Model selection, non phylogenetically corrected
+
+
+#Load Sol data
+
+sol<-read.csv("Data/1221523Database1.csv",stringsAsFactors = F)
+sol_nz<-subset(sol,subset = sol$Location_of_introduction == "New_Zealand")
+us_nz<-subset(intros,intros$site_i=="N")
+
+sol_hi<-subset(sol,subset = sol$Location_of_introduction == "Hawaiian_Islands")
+us_hi<-subset(intros,intros$site_i=="H")
+
+
+#The data in NZ is broken down by different introductions, need to convert to #events, # individuals
+
+summarized_nz_output<-NULL
+for(i in 1:length(unique(sol_nz$Species))){
+  species_i<-as.character(unique(sol_nz$Species)[i] ) 
+  data_i<-subset(sol_nz,sol_nz$Species==species_i)  
+  
+  n_events<-nrow(data_i)
+  n_individuals<-sum(data_i$Propagule_size,na.rm = T)
+  
+  if(sum(data_i$Outcome_binary)>0){success<-1}else{success<-0}  
+  
+  species_data_i<-unique(data_i[,c(9:32,34:35)])  
+  climate_match_mean<-mean(data_i$Climate_matching,na.rm = T)  
+  
+  output_i<-cbind(species_i,success,n_individuals,n_events,species_data_i,climate_match_mean)
+  summarized_nz_output<-rbind(summarized_nz_output,output_i)
+  
+  
+}
+
+rm(species_i,data_i,n_events,n_individuals,success,species_data_i,climate_match_mean,output_i,i)
+
+
+
+#The data in HI is broken down by different introductions, need to convert to #events, # individuals
+
+summarized_hi_output<-NULL
+for(i in 1:length(unique(sol_hi$Species))){
+  species_i<-as.character(unique(sol_hi$Species)[i] ) 
+  data_i<-subset(sol_hi,sol_hi$Species==species_i)  
+  
+  n_events<-nrow(data_i)
+  n_individuals<-sum(data_i$Propagule_size,na.rm = T)
+  
+  if(sum(data_i$Outcome_binary)>0){success<-1}else{success<-0}  
+  
+  species_data_i<-unique(data_i[,c(9:32,34:35)])  
+  climate_match_mean<-mean(data_i$Climate_matching,na.rm = T)  
+  
+  output_i<-cbind(species_i,success,n_individuals,n_events,species_data_i,climate_match_mean)
+  summarized_hi_output<-rbind(summarized_hi_output,output_i)
+  
+  
+}
+
+rm(species_i,data_i,n_events,n_individuals,success,species_data_i,climate_match_mean,output_i,i)
+
+
+
+#Combine with our data:
+full_data_set_nz <- merge(x = us_nz,y = summarized_nz_output,by = "species_i")
+full_data_set_nz <- full_data_set_nz[which(!is.na(full_data_set_nz$site_i)),]
+full_data_set_nz <- full_data_set_nz[which(!is.na(full_data_set_nz$success)),]
+
+full_data_set_hi <- merge(x = us_hi,y = summarized_hi_output,by = "species_i")
+full_data_set_hi <- full_data_set_hi[which(!is.na(full_data_set_hi$site_i)),]
+full_data_set_hi <- full_data_set_hi[which(!is.na(full_data_set_hi$success)),]
+
+full_data_set<- rbind(full_data_set_hi,full_data_set_nz)
+rm(full_data_set_hi,full_data_set_nz,us_nz,us_hi,sol_hi,sol_nz,sol)
+
+
+
+
+
+
+# Traits included in model selection were those identified by Sol et al. (2012) in their best-fit model and included 
+# body mass, the residuals of brain mass against body mass, the value of a brood relative to expected lifetime reproductive output, and habitat generalism (the number of habitat types used by a species). 
+# We used stepwise model selection (R Core Team 2016) to test hypotheses based on 
+  # 1) Propagule pressure only; 
+  # 2) Propagule pressure and MPD metrics; and 
+  # 3) Propagule pressure and species’ traits. 
+# Stepwise model selection was based on AIC and included both forward and backward selection.  
+# Propagule pressure metrics included both the number of individuals and number of introduction events. 
+# MPD metrics included both source and recipient community MPD.
+
+
+# 1) Propagule pressure only;
+
+
+# 2) Propagule pressure and phylo metrics
+
+
+# 3) Propagule pressure and species’ traits
+
+
+# 4) Propagule pressure and species’ traits and phylo metrics
+
+##############################################################################
+#Model selection in a non-phylo context
+full_data_set$site_i<- as.character(full_data_set$site_i)
+full_data_set$site_i<- as.factor(full_data_set$site_i)
+str(full_data_set)
+
+full_data_set<-full_data_set[c("r_success","s_range_size","s_richness","s_pd","s_nnd","s_mpd","s_vpd","s_spd","s_kpd","r_n_nnd","r_n_mpd","r_n_vpd","r_n_spd","r_n_kpd","r_e_nnd","r_e_mpd","r_e_vpd",
+  "r_e_spd","r_e_kpd","r_ne_nnd","r_ne_mpd","r_ne_vpd","r_ne_spd","r_ne_kpd","n_individuals","n_events","Body_mass","Brain_residual","Brood_value","Habitat_generalism","site_i")]
+
+full_data_set <- na.omit(full_data_set)
+full_data_set$site_numeric<- as.numeric(full_data_set$site_i)
+
+
+
+
+full_model = r_success ~ s_range_size + s_richness + s_pd + s_nnd + s_mpd + s_vpd + s_spd + s_kpd + r_n_nnd + r_n_mpd + r_n_vpd + r_n_spd + r_n_kpd + 
+  r_e_nnd + r_e_mpd + r_e_vpd + r_e_spd + r_e_kpd + r_ne_nnd + r_ne_mpd + r_ne_vpd + r_ne_spd + r_ne_kpd + 
+  n_individuals + n_events + Body_mass + Brain_residual + Brood_value + Habitat_generalism + (1|site_i) + (1|species_i__)
+
+?glmer
+prop_pressure_full <-lme4::glmer(formula = r_success ~ s_range_size + s_richness + s_pd + s_nnd + s_mpd + s_vpd + s_spd + s_kpd + r_n_nnd + r_n_mpd + r_n_vpd + r_n_spd + r_n_kpd + 
+                      r_e_nnd + r_e_mpd + r_e_vpd + r_e_spd + r_e_kpd + r_ne_nnd + r_ne_mpd + r_ne_vpd + r_ne_spd + r_ne_kpd + 
+                      n_individuals + n_events + Body_mass + Brain_residual + Brood_value + Habitat_generalism + (1|site_i),
+                    family = "binomial",
+                    data = full_data_set)
+
+LMERConvenienceFunctions::fitLMER.fnc(model = prop_pressure_full,method = "AIC")
+
+
+
+prop_pressure_full <-glm(formula = r_success ~ s_range_size + s_richness + s_pd + s_nnd + s_mpd + s_vpd + s_spd + s_kpd + r_n_nnd + r_n_mpd + r_n_vpd + r_n_spd + r_n_kpd + 
+                                   r_e_nnd + r_e_mpd + r_e_vpd + r_e_spd + r_e_kpd + r_ne_nnd + r_ne_mpd + r_ne_vpd + r_ne_spd + r_ne_kpd + 
+                                   n_individuals + n_events + Body_mass + Brain_residual + Brood_value + Habitat_generalism +(1|site_numeric),
+                                 family = "binomial",
+                                 data = full_data_set)
+
+prop_pressure_full <-glm(formula = r_success ~ 1,
+                         family = "binomial",
+                         data = full_data_set)
+
+
+step_non_phylo <- MASS::stepAIC(object = prop_pressure_full,direction = "both",
+                  scope = list(upper = ~s_range_size + s_richness + s_pd + s_nnd + s_mpd + s_vpd + s_spd + s_kpd + r_n_nnd + r_n_mpd + r_n_vpd + r_n_spd + r_n_kpd + 
+                             r_e_nnd + r_e_mpd + r_e_vpd + r_e_spd + r_e_kpd + r_ne_nnd + r_ne_mpd + r_ne_vpd + r_ne_spd + r_ne_kpd + 
+                             n_individuals + n_events + Body_mass + Brain_residual + Brood_value + Habitat_generalism +site_i,
+                           lower = ~ 1   ) )
+
+summary(step_non_phylo)
+r2glmm::glmPQL(glm.mod = step_non_phylo)
+r2glmm::r2beta(step_non_phylo)
+
+
+
+?MASS::stepAIC
+lmerTest::step(object = prop_pressure_full,reduce.random=F)
+?lmerTest::step
+
+?stepAIC
+
+?step
+prop_only_w_rs<-step(prop_only,direction = "both")
+summary(prop_only_w_rs)
+r.squaredGLMM(prop_only_w_rs)
+
+?
+
+
+
+##############################################################################
+##############################################################################
 #Model selection in a pglmm context
 
   # aic selection manually?
   # code up a model selection algorithm?
 
+  #use a priori models
+full_model = r_success ~ s_range_size + s_richness + s_pd + s_nnd + s_mpd + s_vpd + s_spd + s_kpd + r_n_nnd + r_n_mpd + r_n_vpd + r_n_spd + r_n_kpd + 
+  r_e_nnd + r_e_mpd + r_e_vpd + r_e_spd + r_e_kpd + r_ne_nnd + r_ne_mpd + r_ne_vpd + r_ne_spd + r_ne_kpd + 
+  n_individuals + n_events + Body_mass + Brain_residual + Brood_value + Habitat_generalism + (1|site_i) + (1|species_i__)
+
+
+# 1) Propagule pressure only;
+
+prop_only <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+                                           formula = r_success ~ n_individuals + n_events + (1|site_i) + (1|species_i__),
+                                           data = full_data_set,
+                                           family = "binomial")
+
+prop_only_mean <- summarize_replicates(phylo_reps_output = prop_only)
 
 
 
+# 2) Propagule pressure and phylo metrics
+
+prop_and_phylo <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+                                  formula = r_success ~ s_mpd + r_n_mpd + n_individuals + n_events + (1|site_i) + (1|species_i__),
+                                  data = full_data_set,
+                                  family = "binomial")
+
+prop_and_phylo_mean <- summarize_replicates(phylo_reps_output = prop_and_phylo)
+
+# 3) Propagule pressure and species’ traits
+
+prop_and_traits <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+                                       formula = r_success ~ Body_mass + Brain_residual + Brood_value + Habitat_generalism + n_individuals + n_events + (1|site_i) + (1|species_i__),
+                                       data = full_data_set,
+                                       family = "binomial")
+
+prop_and_traits_mean <- summarize_replicates(phylo_reps_output = prop_and_traits)
+
+# 4) Propagule pressure and species’ traits and phylo metrics
+
+prop_and_phylo_and_traits <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+                                       formula = r_success ~ s_mpd + r_n_mpd + Body_mass + Brain_residual + Brood_value + Habitat_generalism + 
+                                         n_individuals + n_events + (1|site_i) + (1|species_i__),
+                                       data = full_data_set,
+                                       family = "binomial")
+
+prop_and_phylo__and_traits_mean <- summarize_replicates(phylo_reps_output = prop_and_phylo_and_traits)
+
+
+# 2) Phylo only
+
+phylo_only <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+                                       formula = r_success ~ s_mpd + r_n_mpd + (1|site_i) + (1|species_i__),
+                                       data = full_data_set,
+                                       family = "binomial")
+
+phylo_only_mean <- summarize_replicates(phylo_reps_output = phylo_only)
 
 
 
+prop_only_mean
 
+prop_and_phylo_mean
 
+prop_only_mean$aic_mean - prop_and_phylo_mean$aic_mean #AIC diff when adding phylogeny to propagule model
 
+prop_and_traits_mean
 
+prop_and_phylo__and_traits_mean
 
+prop_and_phylo_mean$aic_mean - prop_and_traits_mean$aic_mean
 
+phylo_only_mean
 
 
 
