@@ -227,13 +227,14 @@ estimates_df <- estimates_df[which(estimates_df$metric != "PD_w_richness"),]
 estimates_df$metric <- factor(estimates_df$metric, levels = c("PD","NND", "MPD", "VPD", "SPD", "KPD" ))
 
 source_metric_figure <-
-   ggplot(estimates_df, aes(x=metric, y=estimate,fill=phy_corrected,alpha=significant))+
+   ggplot(estimates_df, aes(x=metric, y=estimate, fill=phy_corrected,alpha=significant,color=phy_corrected))+
   geom_bar(position=position_dodge(), stat="identity")+
   geom_errorbar(aes(ymin=estimate-se, ymax=estimate+se),
                   width=.2,                    # Width of the error bars
-                  position=position_dodge(.9)
+                  position=position_dodge(.9),color="black",alpha=1
                 )+
-  theme(text = element_text(size=20))+labs(fill="Phylogenetic \n correction?",alpha="p < 0.05?")
+  theme(text = element_text(size=20))+
+  labs(fill="Phylogenetic \n correction?",alpha="p < 0.05?")+ylab("model coefficient")+guides(color=FALSE)
 
 #ggsave(filename = "figures_and_tables/source_metric_figure.pdf",plot = source_metric_figure,width = 14,height = 10)
 #ggsave(filename = "figures_and_tables/source_metric_figure.jpg",plot = source_metric_figure,width = 14,height = 10)
