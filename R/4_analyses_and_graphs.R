@@ -95,39 +95,39 @@ stargazer(metric.pd,metric.nnd,metric.mpd,metric.vpd,metric.spd,metric.kpd,type=
 
 # Code for calculating mode with phy corrections
 
-phylo.metric.pd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.pd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                        formula = r_success ~ s_pd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
                        data = intros,
                        family = "binomial")
 
-phylo.metric.pd_no_richness <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.pd_no_richness <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                         formula = r_success ~ s_pd + s_range_size + (1|site_i) + (1|species_i__),
                                         data = intros,
                                         family = "binomial")
 
 
-phylo.metric.nnd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.nnd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                          formula = r_success ~ s_nnd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
                                          data = intros,
                                          family = "binomial")
 
 
-phylo.metric.mpd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.mpd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                         formula = r_success ~ s_mpd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
                                         data = intros,
                                         family = "binomial")
 
-phylo.metric.vpd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.vpd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                          formula = r_success ~ s_vpd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
                                          data = intros,
                                          family = "binomial")
 
-phylo.metric.spd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.spd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                          formula = r_success ~ s_spd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
                                          data = intros,
                                          family = "binomial")
 
-phylo.metric.kpd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
+phylo.metric.kpd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                          formula = r_success ~ s_kpd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
                                          data = intros,
                                          family = "binomial")
