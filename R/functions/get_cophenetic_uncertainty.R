@@ -41,4 +41,6 @@ get_cohpenetic_uncertainty <- function(trees,species_list){
 }
 
 
+#write.csv(x = coph_out_list$coph_means,file = "figures_and_tables/mean_cophenetic_distance_100_phylogenies.csv")
+#write.csv(x = coph_out_list$coph_standard_error,file = "figures_and_tables/se_cophenetic_distance_100_phylogenies.csv")
 
