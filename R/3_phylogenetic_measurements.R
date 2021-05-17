@@ -91,6 +91,7 @@
 #calculate phylo metrics ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 phy_out <- NULL        
+total_species_list <- NULL #needed to calculate phylo uncertainty across species considered in this work
 
 for(p in 1:length(trees)){
   tree_p <- read.tree(trees[p])
@@ -218,6 +219,8 @@ for(i in 1:nrow(unique(introductions[,c("Species","Site")]))){
           r_e_pd,r_e_nnd,r_e_mpd,r_e_vpd,r_e_spd,r_e_kpd,r_e_richness,
           r_ne_pd,r_ne_nnd,r_ne_mpd,r_ne_vpd,r_ne_spd,r_ne_kpd,r_ne_richness
           ))
+  
+  if(p==1){ total_species_list <- unique(c(total_species_list,source_species,recipient_ne_species,species_i)) }#no need to do this more than once
   
   #cleanup
   rm(species_i,site_i,

@@ -1,6 +1,8 @@
 #4 analyses and graphs for ms
 
 #Load required or useful libraries
+#remotes::install_github("coolbutuseless/ggpattern")
+library(ggpattern)
 library(lme4)
 library(MuMIn)#model competition
 library(bbmle)
@@ -13,6 +15,7 @@ library(lattice)
 library(Hmisc)
 library(usdm)
 library(car)
+library(rr2)
 library(lmSupport)
 
 library(ape)
@@ -230,23 +233,86 @@ estimates_df$phy_corrected <- gsub(pattern = "N",replacement = "No",x = estimate
 estimates_df <- estimates_df[which(estimates_df$metric != "PD_w_richness"),]
 estimates_df$metric <- factor(estimates_df$metric, levels = c("PD","NND", "MPD", "VPD", "SPD", "KPD" ))
 
-source_metric_figure <-
-   ggplot(estimates_df, aes(x=metric, y=estimate, fill=phy_corrected,alpha=significant,color=phy_corrected))+
-  geom_bar(position=position_dodge(), stat="identity")+
-  geom_errorbar(aes(ymin=estimate-se, ymax=estimate+se),
-                  width=.2,                    # Width of the error bars
-                  position=position_dodge(.9),color="black",alpha=1
-                )+
-  theme(text = element_text(size=20))+theme_bw(base_size = 30)+
-  labs(fill="Phylogenetic \n correction?",alpha="p < 0.05?")+ylab("model coefficient")+guides(color=FALSE)
 
-#ggsave(filename = "figures_and_tables/source_metric_figure.pdf",plot = source_metric_figure,width = 14,height = 10)
-#ggsave(filename = "figures_and_tables/source_metric_figure.jpg",plot = source_metric_figure,width = 14,height = 10)
+library(tidyverse)
+estimates_df %>%
+  mutate(
+    hypothesis_supported = case_when(
+      metric == "PD" & estimate > 0 ~ "EIH",
+      metric == "NND" & estimate < 0 ~ "EIH",
+      metric == "MPD" & estimate < 0 ~ "EIH",
+      metric == "VPD" & estimate > 0 ~ "EIH",
+      metric == "SPD" & estimate  > 0 ~ "EIH",
+      metric == "KPD" & estimate < 0 ~ "EIH",
+      
+    )) -> estimates_df
+
+#Make dummy stuff so that CCH is shows up on figure legend
+estimates_df <- rbind(estimates_df,replicate(n = ncol(estimates_df),expr = NA))
+estimates_df$hypothesis_supported[13] <- "CCH"
+estimates_df$phy_corrected[13]<-"No"
+estimates_df$significant[13] <- "No"
+estimates_df$metric[13] <- "PD"
+
+
+hyp.colors <- c(EIH = "blue", CCH = "red")
+corr.patterns <- c(Yes = NA, No= "stripe")
+
+source_metric_figure <-
+ggplot(estimates_df, aes(x = metric,
+                         y = estimate,
+                         fill = hypothesis_supported,
+                         alpha = significant,
+                         color = hypothesis_supported,
+                         pattern_ = phy_corrected))+
+  geom_bar_pattern(mapping = aes(pattern = phy_corrected),
+                   stat="identity",
+                   position = position_dodge(),
+                   pattern_density=0.5,
+                   pattern_color = "black",
+                   pattern_alpha=1,
+                   pattern_fill = "white")+
+  scale_fill_manual(values = hyp.colors)+
+  scale_color_manual(values=hyp.colors)+
+  scale_pattern_manual(values = corr.patterns)+
+  geom_errorbar(aes(ymin = estimate-se,
+                    ymax = estimate+se),
+                width=.2,                    # Width of the error bars
+                position=position_dodge(.9),
+                color="black",
+                alpha=1,
+                size=1
+  )+
+  theme(text = element_text(size=20))+
+  theme_bw(base_size = 30)+
+  labs(fill="Hypothesis \n supported",
+       alpha="p < 0.05?",
+       pattern="Phylogenetic \n correction?")+
+  ylab("model coefficient")+
+  guides(color=FALSE)
+
+
+
+
+
+
+# ggsave(filename = "figures_and_tables/source_metric_figure.pdf",
+#        plot = source_metric_figure,
+#        width = 14,
+#        height = 10)
+# 
+# ggsave(filename = "figures_and_tables/source_metric_figure.jpg",
+#        plot = source_metric_figure,
+#        width = 14,
+#        height = 10)
 
 #Get AIC estimates  
 aictable_source_metrics<-estimates_df[order(estimates_df$AIC,decreasing = F),]
 
 write.csv(x = aictable_source_metrics,file = "figures_and_tables/source_metric_aic_table.csv",row.names = F)
+
+estimates_df<-aictable_source_metrics
+
 #############################################################################
 
 

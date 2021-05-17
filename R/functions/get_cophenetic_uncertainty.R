@@ -1,7 +1,9 @@
 #effects of uncertainty
 
   trees <- list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)
-  species_list <- as.character(unique(intros$species_i))
+  species_list <- total_species_list
+  
+  
   
 get_cohpenetic_uncertainty <- function(trees,species_list){
 
