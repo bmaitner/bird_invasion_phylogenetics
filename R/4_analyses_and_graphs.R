@@ -17,15 +17,17 @@ library(usdm)
 library(car)
 library(rr2)
 library(lmSupport)
-
 library(ape)
 library(phyr)
+
 source("R/functions/replicate_models.R")
 
-#Load intro data
+#Load intro data and format columns
 intros <- readRDS("data/mean_phy_metrics_output.rds")
 intros <- as.data.frame(intros)
-intros[3:33] <- apply(X = intros[3:33],MARGIN = 2,FUN = function(x){as.numeric(as.character(x))})
+intros[3:33] <- apply(X = intros[3:33],
+                      MARGIN = 2,
+                      FUN = function(x){as.numeric(as.character(x))})
 
 #drop 2 species with source ranges so small they weren't rasterized
 intros <- na.omit(intros) 
@@ -35,7 +37,7 @@ intros[3:10] <- scale(intros[3:10])
 intros[12:33] <- scale(intros[12:33])
 
 #historically, for some reason, the column corresponding to whether a species was established (1) or not (0), was called "failures".  Let's fix that to avoid confusion
-colnames(intros)[which(colnames(intros)=="r_failure")]<-"r_success"
+colnames(intros)[which(colnames(intros) == "r_failure")]<-"r_success"
 intros$r_success <- as.integer(intros$r_success)
 
 ##############################
@@ -76,13 +78,27 @@ cor.test(x = intros$s_richness,y = intros$s_kpd)#0.00, p > 0.05
 
 
 #calculate success vs metric
-metric.pd <- glmer(formula = r_success ~ s_pd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-metric.pd_no_richness <- glmer(formula = r_success ~ s_pd + s_range_size + (1|site_i),data=intros,family = "binomial")
-metric.nnd <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-metric.mpd <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-metric.vpd <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-metric.spd <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-metric.kpd <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
+metric.pd <- glmer(formula = r_success ~ s_pd + s_range_size + s_richness + (1|site_i),
+                   data = intros,
+                   family = "binomial")
+metric.pd_no_richness <- glmer(formula = r_success ~ s_pd + s_range_size + (1|site_i),
+                               data = intros,
+                               family = "binomial")
+metric.nnd <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + (1|site_i),
+                    data = intros,
+                    family = "binomial")
+metric.mpd <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + (1|site_i),
+                    data = intros,
+                    family = "binomial")
+metric.vpd <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + (1|site_i),
+                    data = intros,
+                    family = "binomial")
+metric.spd <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + (1|site_i),
+                    data = intros,
+                    family = "binomial")
+metric.kpd <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + (1|site_i),
+                    data = intros,
+                    family = "binomial")
 
 #look at models individually
 summary(metric.pd_no_richness) #ns, +
@@ -96,7 +112,7 @@ selection.metric <- model.sel(metric.pd,metric.nnd,metric.mpd,metric.vpd,metric.
 
 stargazer(metric.pd,metric.nnd,metric.mpd,metric.vpd,metric.spd,metric.kpd,type="html",out="figures_and_tables/source_range_metrics.htm")
 
-# Code for calculating mode with phy corrections
+# Code for calculating model with phy corrections
 
 phylo.metric.pd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                        formula = r_success ~ s_pd + s_range_size + s_richness + (1|site_i) + (1|species_i__),
@@ -227,11 +243,16 @@ estimates_df$significant<-"No"
 estimates_df$significant[which(estimates_df$p_value<0.05)]<-"Yes"
 
 
-estimates_df$phy_corrected <- gsub(pattern = "Y",replacement = "Yes",x = estimates_df$phy_corrected)
-estimates_df$phy_corrected <- gsub(pattern = "N",replacement = "No",x = estimates_df$phy_corrected)
+estimates_df$phy_corrected <- gsub(pattern = "Y",
+                                   replacement = "Yes",
+                                   x = estimates_df$phy_corrected)
+estimates_df$phy_corrected <- gsub(pattern = "N",
+                                   replacement = "No",
+                                   x = estimates_df$phy_corrected)
 
 estimates_df <- estimates_df[which(estimates_df$metric != "PD_w_richness"),]
-estimates_df$metric <- factor(estimates_df$metric, levels = c("PD","NND", "MPD", "VPD", "SPD", "KPD" ))
+estimates_df$metric <- factor(estimates_df$metric,
+                              levels = c("PD","NND", "MPD", "VPD", "SPD", "KPD" ))
 
 
 library(tidyverse)
@@ -248,7 +269,9 @@ estimates_df %>%
     )) -> estimates_df
 
 #Make dummy stuff so that CCH is shows up on figure legend
-estimates_df <- rbind(estimates_df,replicate(n = ncol(estimates_df),expr = NA))
+estimates_df <- rbind(estimates_df,
+                      replicate(n = ncol(estimates_df),
+                                expr = NA))
 estimates_df$hypothesis_supported[13] <- "CCH"
 estimates_df$phy_corrected[13]<-"No"
 estimates_df$significant[13] <- "No"
@@ -292,10 +315,6 @@ ggplot(estimates_df, aes(x = metric,
   guides(color=FALSE)
 
 
-
-
-
-
 # ggsave(filename = "figures_and_tables/source_metric_figure.pdf",
 #        plot = source_metric_figure,
 #        width = 14,
@@ -332,12 +351,25 @@ intros$delta_vpd_s_r_n <- (intros$r_n_vpd  - intros$s_vpd)
 intros$delta_spd_s_r_n <- (intros$r_n_spd  - intros$s_spd)
 intros$delta_kpd_s_r_n <- (intros$r_n_kpd  - intros$s_kpd)
 
-delta.nnd <- glmer(formula = r_success ~ r_n_nnd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-delta.mpd <- glmer(formula = r_success ~ r_n_mpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-delta.vpd <- glmer(formula = r_success ~ r_n_vpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-delta.spd <- glmer(formula = r_success ~ r_n_spd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-delta.kpd <- glmer(formula = r_success ~ r_n_kpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
+delta.nnd <- glmer(formula = r_success ~ r_n_nnd + s_range_size + s_richness + (1|site_i),
+                   data = intros,
+                   family = "binomial")
 
+delta.mpd <- glmer(formula = r_success ~ r_n_mpd + s_range_size + s_richness + (1|site_i),
+                   data = intros,
+                   family = "binomial")
+
+delta.vpd <- glmer(formula = r_success ~ r_n_vpd + s_range_size + s_richness + (1|site_i),
+                   data = intros,
+                   family = "binomial")
+
+delta.spd <- glmer(formula = r_success ~ r_n_spd + s_range_size + s_richness + (1|site_i),
+                   data = intros,
+                   family = "binomial")
+
+delta.kpd <- glmer(formula = r_success ~ r_n_kpd + s_range_size + s_richness + (1|site_i),
+                   data =intros,
+                   family = "binomial")
 
 delta.nnd <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:10],
                                         formula = r_success ~ delta_nnd_s_r_n + s_range_size + s_richness + (1|site_i) + (1|species_i__),
@@ -380,28 +412,57 @@ plot(as.factor(intros$word_success)~intros$delta_vpd_s_r_n,xlab = "VPD(recipient
 plot(as.factor(intros$word_success)~intros$delta_spd_s_r_n,xlab = "SPD(recipient) - SPD(source)",ylab = "Establishment Success")
 plot(as.factor(intros$word_success)~intros$delta_kpd_s_r_n,xlab = "KPD(recipient) - KPD(source)",ylab = "Establishment Success")
 
-
-
-
 ###########################################################################
 
 #NND and MPD (phylo/not phylo)
 
 #NND
-#natives only in recipeint
-full_nnd_s <-     glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-full_nnd_s_r_n <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + r_n_nnd  +(1|site_i),data=intros,family = "binomial")
-full_nnd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_nnd  + (1|site_i),data=intros,family = "binomial")
+#natives only in recipient
+full_nnd_s <-     glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + (1|site_i),
+                        data = intros,
+                        family = "binomial")
 
-#established only in recipeint
-full_nnd_s #already done
-full_nnd_s_r_e <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + r_e_nnd  +(1|site_i),data=intros,family = "binomial")
-full_nnd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_nnd  + (1|site_i),data=intros,family = "binomial")
+full_nnd_s_r_n <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + r_n_nnd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
 
-#established + native  in recipeint
+full_nnd_s_r_n_int <- glmer(formula = r_success ~ s_nnd * r_n_nnd + s_nnd + s_range_size + s_richness + r_n_nnd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
+full_nnd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_nnd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
+
+#established only in recipient
 full_nnd_s #already done
-full_nnd_s_r_ne <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + r_ne_nnd  +(1|site_i),data=intros,family = "binomial")
-full_nnd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_nnd  + (1|site_i),data=intros,family = "binomial")
+
+full_nnd_s_r_e <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + r_e_nnd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_nnd_s_r_e_int <- glmer(formula = r_success ~ s_nnd * r_e_nnd + s_nnd + s_range_size + s_richness + r_e_nnd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
+full_nnd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_nnd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
+
+#established + native  in recipient
+full_nnd_s #already done
+
+full_nnd_s_r_ne <- glmer(formula = r_success ~ s_nnd + s_range_size + s_richness + r_ne_nnd  +(1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_nnd_s_r_ne_int <- glmer(formula = r_success ~ s_nnd * r_ne_nnd + s_nnd + s_range_size + s_richness + r_ne_nnd  +(1|site_i),
+                             data = intros,
+                             family = "binomial")
+
+full_nnd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_nnd  + (1|site_i),
+                       data = intros,
+                       family = "binomial")
 
 summary(full_nnd_s)
 
@@ -412,7 +473,7 @@ summary(full_nnd_r_ne)
 summary(full_nnd_s_r_n)
 summary(full_nnd_s_r_e)
 summary(full_nnd_s_r_ne)
-
+summary(full_nnd_s_r_ne_int)
 
 
 #phy corrected
@@ -427,6 +488,12 @@ phylo.full_nnd_s_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                          formula = r_success ~ s_nnd + s_range_size + s_richness + r_n_nnd  +(1|site_i) + (1|species_i__),
                                          data = intros,
                                          family = "binomial")
+
+phylo.full_nnd_s_r_n_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_nnd*r_n_nnd + s_nnd + s_range_size + s_richness + r_n_nnd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
 
 phylo.full_nnd_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                              formula = r_success ~  s_range_size + s_richness + r_n_nnd  + (1|site_i) + (1|species_i__),
@@ -444,6 +511,11 @@ phylo.full_nnd_s_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_nnd_s_r_e_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_nnd*r_e_nnd + s_nnd + s_range_size + s_richness + r_e_nnd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
 phylo.full_nnd_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_e_nnd  + (1|site_i) + (1|species_i__),
                                            data = intros,
@@ -457,6 +529,11 @@ phylo.full_nnd_s_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "dat
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_nnd_s_r_ne_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                              formula = r_success ~ s_nnd * r_ne_nnd +s_nnd + s_range_size + s_richness + r_ne_nnd  +(1|site_i) + (1|species_i__),
+                                              data = intros,
+                                              family = "binomial")
+
 
 
 phylo.full_nnd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
@@ -469,37 +546,72 @@ phylo.full_nnd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/
 
 phylo.full_nnd_s.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s)#507.2
 phylo.full_nnd_s_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s_r_n)#508.6
+phylo.full_nnd_s_r_n_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s_r_n_int)#
 phylo.full_nnd_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_r_n)#510.7
 
 #established only in recipient
 
 phylo.full_nnd_s.mean # done
 phylo.full_nnd_s_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s_r_e) #508.3
+phylo.full_nnd_s_r_e_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s_r_e_int) #
 phylo.full_nnd_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_r_e)#510.3
 
 #native and established in recipient
 
 phylo.full_nnd_s.mean # done
 phylo.full_nnd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s_r_ne)#508.7
+phylo.full_nnd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_s_r_ne_int)#
 phylo.full_nnd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_nnd_r_ne)#510.4
 
 ######################################
 #MPD
 
 #natives only in recipeint
-full_mpd_s <-     glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-full_mpd_s_r_n <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + r_n_mpd  +(1|site_i),data=intros,family = "binomial")
-full_mpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_mpd  + (1|site_i),data=intros,family = "binomial")
+full_mpd_s <-     glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + (1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_mpd_s_r_n <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + r_n_mpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_mpd_s_r_n_int <- glmer(formula = r_success ~ s_mpd*r_n_mpd + s_mpd + s_range_size + s_richness + r_n_mpd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
+full_mpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_mpd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
 
 #established only in recipeint
 full_mpd_s #already done
-full_mpd_s_r_e <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + r_e_mpd  +(1|site_i),data=intros,family = "binomial")
-full_mpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_mpd  + (1|site_i),data=intros,family = "binomial")
+
+full_mpd_s_r_e <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + r_e_mpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_mpd_s_r_e_int <- glmer(formula = r_success ~ s_mpd*r_e_mpd + s_mpd + s_range_size + s_richness + r_e_mpd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
+full_mpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_mpd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
 
 #established + native  in recipeint
 full_mpd_s #already done
-full_mpd_s_r_ne <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + r_ne_mpd  +(1|site_i),data=intros,family = "binomial")
-full_mpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_mpd  + (1|site_i),data=intros,family = "binomial")
+
+full_mpd_s_r_ne <- glmer(formula = r_success ~ s_mpd + s_range_size + s_richness + r_ne_mpd  + (1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_mpd_s_r_ne_int <- glmer(formula = r_success ~ s_mpd*r_ne_mpd + s_mpd + s_range_size + s_richness + r_ne_mpd  +(1|site_i),
+                             data = intros,
+                             family = "binomial")
+
+full_mpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_mpd  + (1|site_i),
+                       data = intros,
+                       family = "binomial")
 
 summary(full_mpd_s)
 
@@ -526,6 +638,12 @@ phylo.full_mpd_s_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_mpd_s_r_n_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_mpd*r_n_mpd +s_mpd + s_range_size + s_richness + r_n_mpd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
+
 phylo.full_mpd_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_n_mpd  + (1|site_i) + (1|species_i__),
                                            data = intros,
@@ -542,6 +660,11 @@ phylo.full_mpd_s_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_mpd_s_r_e_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_mpd*r_e_mpd + s_mpd + s_range_size + s_richness + r_e_mpd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
 phylo.full_mpd_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_e_mpd  + (1|site_i) + (1|species_i__),
                                            data = intros,
@@ -555,6 +678,10 @@ phylo.full_mpd_s_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "dat
                                               data = intros,
                                               family = "binomial")
 
+phylo.full_mpd_s_r_ne_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                              formula = r_success ~ s_mpd*r_ne_mpd + s_mpd + s_range_size + s_richness + r_ne_mpd  +(1|site_i) + (1|species_i__),
+                                              data = intros,
+                                              family = "binomial")
 
 
 phylo.full_mpd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
@@ -567,17 +694,21 @@ phylo.full_mpd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/
 
 phylo.full_mpd_s.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s)#506.4
 phylo.full_mpd_s_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s_r_n) #490.5
+phylo.full_mpd_s_r_n_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s_r_n_int) #
 phylo.full_mpd_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_r_n)#495.3
+
 #established only in recipient
 
 phylo.full_mpd_s.mean # done
 phylo.full_mpd_s_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s_r_e)#507.9
+phylo.full_mpd_s_r_e_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s_r_e_int)#
 phylo.full_mpd_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_r_e)#510.1
 
 #native and established in recipient
 
 phylo.full_mpd_s.mean # done
 phylo.full_mpd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s_r_ne)#504.5
+phylo.full_mpd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_s_r_ne_int)#
 phylo.full_mpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_r_ne)#510.2
 
 
@@ -600,19 +731,48 @@ phylo.full_mpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_
     # native v establshed v native +established
 
 #natives only in recipeint
-full_vpd_s <-     glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-full_vpd_s_r_n <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_n_vpd  +(1|site_i),data=intros,family = "binomial")
+full_vpd_s <-     glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + (1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_vpd_s_r_n <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_n_vpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_vpd_s_r_n_int <- glmer(formula = r_success ~ s_vpd*r_n_vpd + s_vpd + s_range_size + s_richness + r_n_vpd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
 full_vpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_vpd  + (1|site_i),data=intros,family = "binomial")
 
 #established only in recipeint
 full_vpd_s #already done
-full_vpd_s_r_e <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_e_vpd  +(1|site_i),data=intros,family = "binomial")
-full_vpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_vpd  + (1|site_i),data=intros,family = "binomial")
+
+full_vpd_s_r_e <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_e_vpd  +(1|site_i),
+                        data=intros,
+                        family = "binomial")
+
+full_vpd_s_r_e_int <- glmer(formula = r_success ~ s_vpd*r_e_vpd + s_vpd + s_range_size + s_richness + r_e_vpd  +(1|site_i),
+                        data=intros,
+                        family = "binomial")
+
+full_vpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_vpd  + (1|site_i),
+                      data=intros,
+                      family = "binomial")
 
 #established + native  in recipeint
 full_vpd_s #already done
-full_vpd_s_r_ne <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_ne_vpd  +(1|site_i),data=intros,family = "binomial")
-full_vpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_vpd  + (1|site_i),data=intros,family = "binomial")
+full_vpd_s_r_ne <- glmer(formula = r_success ~ s_vpd + s_range_size + s_richness + r_ne_vpd  +(1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_vpd_s_r_ne_int <- glmer(formula = r_success ~ s_vpd*r_ne_vpd + s_vpd + s_range_size + s_richness + r_ne_vpd  +(1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_vpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_vpd  + (1|site_i),
+                       data = intros,
+                       family = "binomial")
 
 
 #VPD
@@ -630,6 +790,12 @@ phylo.full_vpd_s_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_vpd_s_r_n_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_vpd*r_n_vpd + s_vpd + s_range_size + s_richness + r_n_vpd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
+
 phylo.full_vpd_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_n_vpd  + (1|site_i) + (1|species_i__),
                                            data = intros,
@@ -646,6 +812,11 @@ phylo.full_vpd_s_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_vpd_s_r_e_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_vpd*r_e_vpd + s_vpd + s_range_size + s_richness + r_e_vpd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
 phylo.full_vpd_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_e_vpd  + (1|site_i) + (1|species_i__),
                                            data = intros,
@@ -659,6 +830,10 @@ phylo.full_vpd_s_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "dat
                                               data = intros,
                                               family = "binomial")
 
+phylo.full_vpd_s_r_ne_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                              formula = r_success ~ s_vpd*r_ne_vpd + s_vpd + s_range_size + s_richness + r_ne_vpd  +(1|site_i) + (1|species_i__),
+                                              data = intros,
+                                              family = "binomial")
 
 
 phylo.full_vpd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
@@ -671,17 +846,20 @@ phylo.full_vpd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/
 
 phylo.full_vpd_s.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s)#
 phylo.full_vpd_s_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_n) #
+phylo.full_vpd_s_r_n_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_n_int) #
 phylo.full_vpd_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_r_n)#
 #established only in recipient
 
 phylo.full_vpd_s.mean # done
 phylo.full_vpd_s_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_e)#
+phylo.full_vpd_s_r_e_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_e_int)#
 phylo.full_vpd_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_r_e)#
 
 #native and established in recipient
 
 phylo.full_vpd_s.mean # done
 phylo.full_vpd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_ne)#
+phylo.full_vpd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_ne_int)#
 phylo.full_vpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_r_ne)#
 
 
@@ -690,20 +868,51 @@ phylo.full_vpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_
 #SPD
 
 #natives only in recipeint
-full_spd_s <-     glmer(formula = r_success ~ s_spd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-full_spd_s_r_n <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_n_spd  +(1|site_i),data=intros,family = "binomial")
-full_spd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_spd  + (1|site_i),data=intros,family = "binomial")
+full_spd_s <-     glmer(formula = r_success ~ s_spd + s_range_size + s_richness + (1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_spd_s_r_n <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_n_spd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_spd_s_r_n_int <- glmer(formula = r_success ~ s_spd*r_n_spd + s_spd + s_range_size + s_richness + r_n_spd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
+full_spd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_spd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
 
 #established only in recipeint
 full_spd_s #already done
-full_spd_s_r_e <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_e_spd  +(1|site_i),data=intros,family = "binomial")
-full_spd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_spd  + (1|site_i),data=intros,family = "binomial")
+
+full_spd_s_r_e <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_e_spd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_spd_s_r_e_int <- glmer(formula = r_success ~ s_spd*r_e_spd + s_spd + s_range_size + s_richness + r_e_spd  +(1|site_i),
+                            data = intros,
+                            family = "binomial")
+
+full_spd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_spd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
 
 #established + native  in recipeint
 full_spd_s #already done
-full_spd_s_r_ne <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_ne_spd  +(1|site_i),data=intros,family = "binomial")
-full_spd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_spd  + (1|site_i),data=intros,family = "binomial")
 
+full_spd_s_r_ne <- glmer(formula = r_success ~ s_spd + s_range_size + s_richness + r_ne_spd  +(1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_spd_s_r_ne_int <- glmer(formula = r_success ~ s_spd*r_ne_spd + s_spd + s_range_size + s_richness + r_ne_spd  +(1|site_i),
+                             data = intros,
+                             family = "binomial")
+
+full_spd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_spd  + (1|site_i),
+                       data = intros,
+                       family = "binomial")
 
 #phy corrected
 
@@ -718,12 +927,15 @@ phylo.full_spd_s_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_spd_s_r_n_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_spd*r_n_spd + s_spd + s_range_size + s_richness + r_n_spd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
 phylo.full_spd_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_n_spd  + (1|site_i) + (1|species_i__),
                                            data = intros,
                                            family = "binomial")
-
-
 
 
 #established only in recipient
@@ -731,6 +943,11 @@ phylo.full_spd_s #done
 
 phylo.full_spd_s_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                              formula = r_success ~ s_spd + s_range_size + s_richness + r_e_spd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
+phylo.full_spd_s_r_e_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_spd*r_e_spd + s_spd + s_range_size + s_richness + r_e_spd  +(1|site_i) + (1|species_i__),
                                              data = intros,
                                              family = "binomial")
 
@@ -747,7 +964,10 @@ phylo.full_spd_s_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "dat
                                               data = intros,
                                               family = "binomial")
 
-
+phylo.full_spd_s_r_ne_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                              formula = r_success ~ s_spd*r_ne_spd + s_spd + s_range_size + s_richness + r_ne_spd  +(1|site_i) + (1|species_i__),
+                                              data = intros,
+                                              family = "binomial")
 
 phylo.full_spd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                             formula = r_success ~  s_range_size + s_richness + r_ne_spd  + (1|site_i) + (1|species_i__),
@@ -759,37 +979,70 @@ phylo.full_spd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/
 
 phylo.full_spd_s.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s)#
 phylo.full_spd_s_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s_r_n) #
+phylo.full_spd_s_r_n_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s_r_n_int) #
 phylo.full_spd_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_r_n)#
 #established only in recipient
 
 phylo.full_spd_s.mean # done
 phylo.full_spd_s_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s_r_e)#
+phylo.full_spd_s_r_e_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s_r_e_int)
 phylo.full_spd_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_r_e)#
 
 #native and established in recipient
 
 phylo.full_spd_s.mean # done
 phylo.full_spd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s_r_ne)#
+phylo.full_spd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_s_r_ne_int)#
 phylo.full_spd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_r_ne)#
 
 
 
 #KPD
 
-#natives only in recipeint
-full_kpd_s <-     glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + (1|site_i),data=intros,family = "binomial")
-full_kpd_s_r_n <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_n_kpd  +(1|site_i),data=intros,family = "binomial")
-full_kpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_kpd  + (1|site_i),data=intros,family = "binomial")
+#natives only in recipient
+full_kpd_s <-     glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + (1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_kpd_s_r_n <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_n_kpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_kpd_s_r_n_int <- glmer(formula = r_success ~ s_kpd*r_n_kpd + s_kpd + s_range_size + s_richness + r_n_kpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_kpd_r_n <- glmer(formula = r_success ~  s_range_size + s_richness + r_n_kpd  + (1|site_i),
+                      data = intros,
+                      family = "binomial")
 
 #established only in recipeint
 full_kpd_s #already done
-full_kpd_s_r_e <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_e_kpd  +(1|site_i),data=intros,family = "binomial")
+
+full_kpd_s_r_e <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_e_kpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
+full_kpd_s_r_e_int <- glmer(formula = r_success ~ s_kpd*r_e_kpd + s_kpd + s_range_size + s_richness + r_e_kpd  +(1|site_i),
+                        data = intros,
+                        family = "binomial")
+
 full_kpd_r_e <- glmer(formula = r_success ~  s_range_size + s_richness + r_e_kpd  + (1|site_i),data=intros,family = "binomial")
 
 #established + native  in recipeint
 full_kpd_s #already done
-full_kpd_s_r_ne <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_ne_kpd  +(1|site_i),data=intros,family = "binomial")
-full_kpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_kpd  + (1|site_i),data=intros,family = "binomial")
+
+full_kpd_s_r_ne <- glmer(formula = r_success ~ s_kpd + s_range_size + s_richness + r_ne_kpd  +(1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_kpd_s_r_ne_int <- glmer(formula = r_success ~ s_kpd*r_ne_kpd + s_kpd + s_range_size + s_richness + r_ne_kpd  +(1|site_i),
+                         data = intros,
+                         family = "binomial")
+
+full_kpd_r_ne <- glmer(formula = r_success ~  s_range_size + s_richness + r_ne_kpd  + (1|site_i),
+                       data = intros,
+                       family = "binomial")
 
 
 #phy corrected
@@ -805,12 +1058,15 @@ phylo.full_kpd_s_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data
                                              data = intros,
                                              family = "binomial")
 
+phylo.full_kpd_s_r_n_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_kpd*r_n_kpd + s_kpd + s_range_size + s_richness + r_n_kpd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
 phylo.full_kpd_r_n <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                            formula = r_success ~  s_range_size + s_richness + r_n_kpd  + (1|site_i) + (1|species_i__),
                                            data = intros,
                                            family = "binomial")
-
-
 
 
 #established only in recipient
@@ -818,6 +1074,11 @@ phylo.full_kpd_s #done
 
 phylo.full_kpd_s_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                              formula = r_success ~ s_kpd + s_range_size + s_richness + r_e_kpd  +(1|site_i) + (1|species_i__),
+                                             data = intros,
+                                             family = "binomial")
+
+phylo.full_kpd_s_r_e_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                             formula = r_success ~ s_kpd*r_e_kpd + s_kpd + s_range_size + s_richness + r_e_kpd  +(1|site_i) + (1|species_i__),
                                              data = intros,
                                              family = "binomial")
 
@@ -829,12 +1090,16 @@ phylo.full_kpd_r_e <- replicate_phylo_glmm(tree_list = list.files(path = "data/b
 
 #native and established in recipient
 phylo.full_kpd_s #done
+
 phylo.full_kpd_s_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                               formula = r_success ~ s_kpd + s_range_size + s_richness + r_ne_kpd  +(1|site_i) + (1|species_i__),
                                               data = intros,
                                               family = "binomial")
 
-
+phylo.full_kpd_s_r_ne_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                              formula = r_success ~ s_kpd*r_ne_kpd + s_kpd + s_range_size + s_richness + r_ne_kpd  +(1|site_i) + (1|species_i__),
+                                              data = intros,
+                                              family = "binomial")
 
 phylo.full_kpd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
                                             formula = r_success ~  s_range_size + s_richness + r_ne_kpd  + (1|site_i) + (1|species_i__),
@@ -846,17 +1111,20 @@ phylo.full_kpd_r_ne <- replicate_phylo_glmm(tree_list = list.files(path = "data/
 
 phylo.full_kpd_s.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s)#
 phylo.full_kpd_s_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_n) #
+phylo.full_kpd_s_r_n_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_n_int) #
 phylo.full_kpd_r_n.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_r_n)#
 #established only in recipient
 
 phylo.full_kpd_s.mean # done
 phylo.full_kpd_s_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_e)#
+phylo.full_kpd_s_r_e_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_e_int)#
 phylo.full_kpd_r_e.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_r_e)#
 
 #native and established in recipient
 
 phylo.full_kpd_s.mean # done
 phylo.full_kpd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_ne)#
+phylo.full_kpd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_ne_int)#
 phylo.full_kpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_r_ne)#
 
 #############################################################################
