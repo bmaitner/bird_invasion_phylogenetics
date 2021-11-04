@@ -23,30 +23,32 @@ library(maptools)
 library(sf)
 library(raster)
 
-cont<-read_sf("C:/Users/Brian/Desktop/Range maps/landmass/continents_equal_area.shp")
-cont<-as_Spatial(cont)
+#Import a global landmass polygon
+cont <- read_sf("C:/Users/Brian/Desktop/Range maps/landmass/continents_equal_area.shp")
+cont <- as_Spatial(cont)
 
+#List the birdlife shapefiles
 shapefiles <- list.files(path = "data/All_Shapefiles/",pattern = ".shp",full.names = T,recursive = T)
 
-template<-raster()
-template<-projectRaster(from = template,crs = crs("+proj=cea +units=km"),res = 110)
+#Make a template raster at 110km resolution
+template <- raster()
+template <- projectRaster(from = template,crs = crs("+proj=cea +units=km"),res = 110)
 
 #Prep empty output file
-skinny_occurrences<-NULL
-
+skinny_occurrences <- NULL
 
 for(i in 1:length(shapefiles)){
 cat(round(i/length(shapefiles),digits = 2)*100," percent done")
 
-sp_i<-NULL
+sp_i <- NULL
 try(sp_i <- sf::st_read(dsn = shapefiles[i]))
 if(is.null(sp_i)){next}
 
 #cut out empty geometries(these prevent conversion to spatial)
-sp_i<-sp_i[which(sapply(X = sp_i$geometry,FUN = length)>0),]
+sp_i <- sp_i[which(sapply(X = sp_i$geometry,FUN = length)>0),]
 
 #convert to spatial(needed for rasterization, which is needed to get pct cover of cells)
-sp_i<-as_Spatial(sp_i)
+sp_i <- as_Spatial(sp_i)
 
 #if there is no data associated with the geometries, skip the file
 if(ncol(sp_i@data)==0){next}
@@ -56,14 +58,14 @@ sp_i <- sp_i[which(sp_i@data$ORIGIN != 4),]
 
 
 #rasterize by ORIGIN(this contains native/introduced data)
-raster_i<-rasterize(x = spTransform(x = sp_i,CRSobj = template@crs),y = template,field="ORIGIN")
-raster_i_cover<-rasterize(x = spTransform(x = sp_i,CRSobj = template@crs),y = template,field="ORIGIN",getCover=T)
+raster_i <- rasterize(x = spTransform(x = sp_i,CRSobj = template@crs),y = template,field="ORIGIN")
+raster_i_cover <- rasterize(x = spTransform(x = sp_i,CRSobj = template@crs),y = template,field="ORIGIN",getCover=T)
 
 #plot(raster_i)
 #plot(spTransform(x = cont,CRSobj = template@crs),add=T)
 
 #only try to add data if there is any to add
-if(length(which(getValues(raster_i_cover>0)))>0){
+if(length(which(getValues(raster_i_cover > 0))) > 0){
 
 skinny_occurrences <- rbind(skinny_occurrences,cbind(as.character(sp_i@data$SCINAME[1]),which(getValues(raster_i_cover>0)),raster_i[which(getValues(raster_i_cover>0))] ,raster_i_cover[which(getValues(raster_i_cover>0))]))
 
@@ -73,16 +75,16 @@ skinny_occurrences <- rbind(skinny_occurrences,cbind(as.character(sp_i@data$SCIN
 }
 rm(raster_i,raster_i_cover,sp_i,shapefiles,i)
 
-skinny_occurrences<-as.data.frame(skinny_occurrences)
-colnames(skinny_occurrences)<-c("species","cell","origin","percent_cover")
+skinny_occurrences <- as.data.frame(skinny_occurrences)
+colnames(skinny_occurrences) <- c("species","cell","origin","percent_cover")
 
 saveRDS(object = skinny_occurrences,file = "data/cea_occurrences.rds")
 
-#do with other batch of files in case I missed any
+#do with other batch of files in case I missed any (this was necessary because I've had issue with incomplete file transfers with google drive, so this ensures I've got them all)
 
 shapefiles2 <- list.files(path = "data/All_Shapefiles_2_5_2016/",pattern = ".shp",full.names = T,recursive = T)
 
-skinny_occurrences<-NULL
+skinny_occurrences <- NULL
 for(i in 1:length(shapefiles2)){
   cat(round(i/length(shapefiles2),digits = 2)*100," percent done")
   
@@ -128,9 +130,9 @@ for(i in 1:length(shapefiles2)){
 
 rm(raster_i,raster_i_cover,sp_i,shapefiles2,i)
 
-skinny_occurrences<-as.data.frame(skinny_occurrences)
-colnames(skinny_occurrences)<-c("species","cell","origin","percent_cover")
-skinny_occs_batch_one<-readRDS(file = "data/cea_occurrences.rds")
+skinny_occurrences <- as.data.frame(skinny_occurrences)
+colnames(skinny_occurrences) <- c("species","cell","origin","percent_cover")
+skinny_occs_batch_one <- readRDS(file = "data/cea_occurrences.rds")
 skinny_occurrences <- rbind(skinny_occs_batch_one,skinny_occurrences)
 saveRDS(object = skinny_occurrences,file = "data/cea_occurrences.rds")
 

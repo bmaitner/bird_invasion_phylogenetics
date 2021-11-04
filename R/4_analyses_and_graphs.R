@@ -49,15 +49,6 @@ cor.test(intros$s_pd,intros$s_richness) #cor = .99
 
 
 #############################################################################
-#Comparison of native range phylogenetic metrics
-  #We compared the relative predictive ability of three native range phylogenetic metrics (PD, MPD, NND) by comparing the fits of generalized linear models. 
-#The models contained the native region phylogenetic metric,native region range size as predictor variables, 
-  #region of introduction (Hawaii, Florida, New Zealand) as a random effect and 
-  #introduction success as a binary response (successful vs failed) variable with a logit link. 
-
-#In our dataset, establishment success showed a weak, non-significant trend of positive association with PD of the native (source) range (Fig. 2, Supplementary Table S2). In contrast, establishment success showed significant, negative relationships with both native (source) range MPD and NND (Fig. 2, Table S2), with MPD showing a slightly better fit (1 < ΔAIC < 2; Table S2). 
-#We focused all further analyses on these latter two metrics.
-  # phy correction
 
 #Native range size vs. source phy metric
 cor.test(x = intros$s_range_size,y = intros$s_pd)#0.66 , p <0.05
@@ -1365,8 +1356,6 @@ lmerTest::step(object = prop_pressure_full,reduce.random=F)
 prop_only_w_rs<-step(prop_only,direction = "both")
 summary(prop_only_w_rs)
 r.squaredGLMM(prop_only_w_rs)
-
-?
 
 
 

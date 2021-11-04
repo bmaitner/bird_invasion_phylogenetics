@@ -7,7 +7,7 @@
 #Species that co-occur with introduced species
 
 #load in birdlife taxonomy
-bl_taxonomy<- read.csv("data/BirdLife_Checklist_Version_80/Checklist v8 Oct15/BirdLife_Checklist_Version_8.csv",stringsAsFactors = F)
+bl_taxonomy <- read.csv("data/BirdLife_Checklist_Version_80/Checklist v8 Oct15/BirdLife_Checklist_Version_8.csv",stringsAsFactors = F)
 
 #rename species to match format of phylo, introduction data
 bl_taxonomy$Scientific.name <- gsub(pattern = " ",replacement = "_",x = bl_taxonomy$Scientific.name)
@@ -47,7 +47,7 @@ rm(intro_names_to_check)
 #first, we need all relevant species from source or recipient regions
 
 occs <- readRDS("data/cea_occurrences.rds")
-occs$species<-as.character(occs$species)
+occs$species <- as.character(occs$species)
 occs$species <- gsub(pattern = " ",replacement = "_",x = occs$species)
 
 
@@ -71,14 +71,14 @@ gadm <- gadm[which((gadm$NAME_0 =="United States" & gadm$NAME_1 %in% c("Hawaii",
 gadm <- sf:::as_Spatial(gadm)#convert to spatial
 
 #reproject to crs of template raster
-template<-raster()
-template<-projectRaster(from = template,crs = crs("+proj=cea +units=km"),res = 110)
+template <- raster()
+template <- projectRaster(from = template,crs = crs("+proj=cea +units=km"),res = 110)
 gadm <- spTransform(x = gadm,CRSobj = template@crs)
 plot(gadm)
-gadm@data$name01<-paste(gadm@data$NAME_0,gadm@data$NAME_1)
+gadm@data$name01 <- paste(gadm@data$NAME_0,gadm@data$NAME_1)
 gadm@data$name01
 
-focal_cells<-NULL
+focal_cells <- NULL
 for(i in 1:length(unique(gadm@data$name01))){
 
   gadm_raster_i <- rasterize(x = gadm[which(gadm@data$name01==unique(gadm@data$name01)[i]),],y = template,getCover=T)  
@@ -103,7 +103,7 @@ rm(intro_species_to_check,native_species_to_check,recipient_species_to_check)
 #Now, we need to check that all of the species in the "combined_species_to_check" file are present in the phylos
 #if they are not, need to correct their names
 
-trees <- list.files("data/Bird_Phylogeny/",pattern = "tree_",full.names = T)
+trees <- list.files("data/Bird_Phylogeny/",pattern = "tree_",full.names = T)#these are the birdtree.org phylogenies
 tree1 <- read.tree(trees[1])
 tree <- read.tree(trees[1])
 

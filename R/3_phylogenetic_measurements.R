@@ -32,9 +32,9 @@
     introductions <- read.csv("data/invasion_data.csv",stringsAsFactors = F)
     
     #cut australia data (too large an area)
-    introductions<-introductions[which(introductions$Site!="A"),]
+    introductions <- introductions[which(introductions$Site!="A"),]
     #cut individual hawaiian islands
-    introductions<-introductions[which(introductions$Site!="I"),]
+    introductions <- introductions[which(introductions$Site!="I"),]
     
     #one bad name ( hybrid, drop from analysis)
     introductions<-introductions[grep(pattern = "_x_",x = introductions$Species,invert = T),]
@@ -47,7 +47,7 @@
     
   #load occurrences
     occs <- readRDS("data/cea_occurrences.rds")
-    occs$species<-as.character(occs$species)
+    occs$species <- as.character(occs$species)
     occs$species <- gsub(pattern = " ",replacement = "_",x = occs$species)
   
   #load in recipient region polygons
@@ -63,12 +63,12 @@
     gadm <- sf:::as_Spatial(gadm)#convert to spatial
     
     #reproject to crs of template raster
-    template<-raster()
-    template<-projectRaster(from = template,crs = crs("+proj=cea +units=km"),res = 110)
+    template <- raster()
+    template <- projectRaster(from = template,crs = crs("+proj=cea +units=km"),res = 110)
     gadm <- spTransform(x = gadm,CRSobj = template@crs)
-    gadm@data$name01<-paste(gadm@data$NAME_0,gadm@data$NAME_1)
+    gadm@data$name01 <- paste(gadm@data$NAME_0,gadm@data$NAME_1)
     
-    focal_cells<-NULL
+    focal_cells <- NULL
     for(i in 1:length(unique(gadm@data$name01))){
       
       gadm_raster_i <- rasterize(x = gadm[which(gadm@data$name01==unique(gadm@data$name01)[i]),],y = template,getCover=T)  
@@ -78,7 +78,7 @@
     }
     focal_cells <- as.data.frame(focal_cells)
     colnames(focal_cells) <- c("cell","pct_cover","political_unit")
-    focal_cells$cell<-as.numeric(as.character(focal_cells$cell))
+    focal_cells$cell <- as.numeric(as.character(focal_cells$cell))
     
     #cleanup
     rm(gadm_raster_i,i,gadm,template)
@@ -100,6 +100,7 @@ for(p in 1:length(trees)){
     tree_p$tip.label <- as.character(tree_p_corrected$corrected)
     rm(tree_p_taxa,tree_p_corrected)
     coph_p <- cophenetic(x = tree_p)
+    #save a copy of the phylogeny with the updated names
     write.tree(phy = tree_p,file = paste("data/bird_phylogeny_updated_names/updated_names_",  strsplit(x = trees[p],split = "/" )[[1]][length(strsplit(x = trees[p],split = "/" )[[1]])],sep = ""))
   
     
