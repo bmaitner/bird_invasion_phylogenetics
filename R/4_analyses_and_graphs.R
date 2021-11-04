@@ -161,6 +161,14 @@ phylo.metric.vpd.mean <- summarize_replicates(phylo_reps_output = phylo.metric.v
 phylo.metric.spd.mean <- summarize_replicates(phylo_reps_output = phylo.metric.spd)
 phylo.metric.kpd.mean <- summarize_replicates(phylo_reps_output = phylo.metric.kpd)
 
+# Cut the replicated stuff to save memory if need be
+  # rm(phylo.metric.pd,
+  #    phylo.metric.pd_no_richness,
+  #    phylo.metric.nnd,
+  #    phylo.metric.mpd,
+  #    phylo.metric.vpd,
+  #    phylo.metric.spd,
+  #    phylo.metric.kpd)
 
 estimates_df<-as.data.frame(matrix(nrow = 14,ncol = 6))
 colnames(estimates_df)<-c("metric","estimate","se","p_value","phy_corrected","AIC")
@@ -712,6 +720,20 @@ phylo.full_mpd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo
 phylo.full_mpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_mpd_r_ne)#510.2
 
 
+#Cut full models to save space
+# rm(phylo.full_mpd_r_e,
+#    phylo.full_mpd_r_n,
+#    phylo.full_mpd_r_ne,
+#    phylo.full_mpd_s,
+#    phylo.full_mpd_s_r_n,
+#    phylo.full_mpd_s_r_e,
+#    phylo.full_mpd_s_r_ne,
+#    phylo.full_mpd_s_r_n_int,
+#    phylo.full_mpd_s_r_e_int,
+#    phylo.full_mpd_s_r_ne_int)
+
+
+
 # Figure 4/ model: Models of introduction success based on Mean Phylogenetic Distance (MPD) of the invader to community members. 
 # Models included the area of the species’ native range as a covariate, region of introduction as a random effect, and either 
   #1) MPD to a species’ native source community, 
@@ -862,7 +884,17 @@ phylo.full_vpd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.ful
 phylo.full_vpd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_s_r_ne_int)#
 phylo.full_vpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_vpd_r_ne)#
 
-
+#Cut full models to save space
+# rm(phylo.full_vpd_r_e,
+#    phylo.full_vpd_r_n,
+#    phylo.full_vpd_r_ne,
+#    phylo.full_vpd_s,
+#    phylo.full_vpd_s_r_n,
+#    phylo.full_vpd_s_r_e,
+#    phylo.full_vpd_s_r_ne,
+#    phylo.full_vpd_s_r_n_int,
+#    phylo.full_vpd_s_r_e_int,
+#    phylo.full_vpd_s_r_ne_int)
 
 
 #SPD
@@ -996,6 +1028,19 @@ phylo.full_spd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo
 phylo.full_spd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_spd_r_ne)#
 
 
+#Cut full models to save space
+# rm(phylo.full_spd_r_e,
+#    phylo.full_spd_r_n,
+#    phylo.full_spd_r_ne,
+#    phylo.full_spd_s,
+#    phylo.full_spd_s_r_n,
+#    phylo.full_spd_s_r_e,
+#    phylo.full_spd_s_r_ne,
+#    phylo.full_spd_s_r_n_int,
+#    phylo.full_spd_s_r_e_int,
+#    phylo.full_spd_s_r_ne_int)
+
+
 
 #KPD
 
@@ -1127,6 +1172,19 @@ phylo.full_kpd_s_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.ful
 phylo.full_kpd_s_r_ne_int.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_s_r_ne_int)#
 phylo.full_kpd_r_ne.mean <- summarize_replicates(phylo_reps_output = phylo.full_kpd_r_ne)#
 
+#Cut full models to save space
+# rm(phylo.full_kpd_r_e,
+#    phylo.full_kpd_r_n,
+#    phylo.full_kpd_r_ne,
+#    phylo.full_kpd_s,
+#    phylo.full_kpd_s_r_n,
+#    phylo.full_kpd_s_r_e,
+#    phylo.full_kpd_s_r_ne,
+#    phylo.full_kpd_s_r_n_int,
+#    phylo.full_kpd_s_r_e_int,
+#    phylo.full_kpd_s_r_ne_int)
+
+
 #############################################################################
 #############################################################################
 
@@ -1136,8 +1194,8 @@ phylo_model_summary <- summarize_phyl0_models(digits_to_round = 3)
 nonphylo_model_summary <- summarize_nonphylo_models(digits_to_round = 3)
 setdiff(colnames(phylo_model_summary),colnames(nonphylo_model_summary))
 setdiff(colnames(nonphylo_model_summary),colnames(phylo_model_summary))
-
-
+write.csv(x = phylo_model_summary,file = "figures_and_tables/phylo_model_summary.csv")
+write.csv(x = nonphylo_model_summary,file = "figures_and_tables/nonphylo_model_summary.csv")
 
 #############################################################################
 #############################################################################
@@ -1316,8 +1374,6 @@ r.squaredGLMM(prop_only_w_rs)
 ##############################################################################
 #Model selection in a pglmm context
 
-  # aic selection manually?
-  # code up a model selection algorithm?
 
   #use a priori models
 full_model = r_success ~ s_range_size + s_richness + s_pd + s_nnd + s_mpd + s_vpd + s_spd + s_kpd + r_n_nnd + r_n_mpd + r_n_vpd + r_n_spd + r_n_kpd + 
@@ -1345,6 +1401,19 @@ prop_and_phylo <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_
 
 prop_and_phylo_mean <- summarize_replicates(phylo_reps_output = prop_and_phylo)
 
+
+#2.1) Propagule pressure and phylo metrics with interaction
+
+prop_and_phylo_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                       formula = r_success ~ s_mpd*r_n_mpd+ s_mpd + r_n_mpd + n_individuals + n_events + (1|site_i) + (1|species_i__),
+                                       data = full_data_set,
+                                       family = "binomial")
+
+prop_and_phylo_int_mean <- summarize_replicates(phylo_reps_output = prop_and_phylo_int)
+
+
+
+
 # 3) Propagule pressure and species’ traits
 
 prop_and_traits <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
@@ -1364,6 +1433,18 @@ prop_and_phylo_and_traits <- replicate_phylo_glmm(tree_list = list.files(path = 
 
 prop_and_phylo__and_traits_mean <- summarize_replicates(phylo_reps_output = prop_and_phylo_and_traits)
 
+# 4.1) Propagule pressure and species’ traits and phylo metrics with int
+
+prop_and_phylo_and_traits_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                                  formula = r_success ~ s_mpd*r_n_mpd + s_mpd + r_n_mpd + Body_mass + Brain_residual + Brood_value + Habitat_generalism + 
+                                                    n_individuals + n_events + (1|site_i) + (1|species_i__),
+                                                  data = full_data_set,
+                                                  family = "binomial")
+
+prop_and_phylo__and_traits_int_mean <- summarize_replicates(phylo_reps_output = prop_and_phylo_and_traits_int)
+
+
+
 
 # 2) Phylo only
 
@@ -1375,10 +1456,24 @@ phylo_only <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phyl
 phylo_only_mean <- summarize_replicates(phylo_reps_output = phylo_only)
 
 
+# 2.1) Phylo only int
+
+phylo_only_int <- replicate_phylo_glmm(tree_list = list.files(path = "data/bird_phylogeny_updated_names/",full.names = T)[1:100],
+                                   formula = r_success ~ s_mpd*r_n_mpd + s_mpd + r_n_mpd + (1|site_i) + (1|species_i__),
+                                   data = full_data_set,
+                                   family = "binomial")
+
+phylo_only_int_mean <- summarize_replicates(phylo_reps_output = phylo_only_int)
+
+
+
+
 
 prop_only_mean
 
 prop_and_phylo_mean
+
+#prop_and_phylo_int_mean #lower AIC than without int
 
 prop_only_mean$aic_mean - prop_and_phylo_mean$aic_mean #AIC diff when adding phylogeny to propagule model
 
@@ -1386,11 +1481,17 @@ prop_and_traits_mean
 
 prop_and_phylo__and_traits_mean
 
+#prop_and_phylo__and_traits_mean$aic_mean-prop_and_phylo__and_traits_int_mean$aic_mean
+#prop_and_phylo__and_traits_int_mean #lower AIC than without int
+#prop_and_phylo_mean$aic_mean - prop_and_phylo_int_mean$aic_mean
+
+
 prop_and_phylo_mean$aic_mean - prop_and_traits_mean$aic_mean
 
 phylo_only_mean
 
-
+#phylo_only_int_mean #lower AIC than without int
+#phylo_only_mean$aic_mean - phylo_only_int_mean$aic_mean
 
 
 
@@ -1398,3 +1499,13 @@ phylo_only_mean
 # Graph: Comparison of R2 values and partial R2 values for models incorporating propagule pressure. All models included establishment success as a binary response variable. Predictor variables included: (A) propagule number and size; (B) propagule number and size and recipient community MPD; and (C) propagule number and size, habitat generalism, brood value and brain size residuals. 
 
 ############################################################################
+
+cor(intros$s_mpd,intros$s_richness)
+cor(intros$s_richness,intros$s_nnd)
+cor(intros$s_richness,intros$s_mpd)
+cor(intros$s_richness,intros$s_vpd)
+cor(intros$s_richness,intros$s_spd)
+cor(intros$s_richness,intros$s_kpd)
+
+cor(intros$s_mpd,intros$s_v)
+
