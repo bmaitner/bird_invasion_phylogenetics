@@ -3,3 +3,13 @@
 .RData
 .Ruserdata
 data/All_Shapefiles_2_5_2016
+data/All_Shapefiles
+data/Bird_Phylogeny
+data/bird_phylogeny_updated_names
+data/cea_occurrences.rds
+data/Birdlife_Checklist_Version_80
+data/1221523Database1.csv
+figures_and_tables
+*.RData
+draft
+rev_1
