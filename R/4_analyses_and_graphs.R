@@ -30,7 +30,8 @@ intros[3:33] <- apply(X = intros[3:33],
                       FUN = function(x){as.numeric(as.character(x))})
 
 #drop 2 species with source ranges so small they weren't rasterized
-intros <- na.omit(intros) 
+intros <- na.omit(intros)
+
 
 #rescale predictors
 intros[3:10] <- scale(intros[3:10])
@@ -40,6 +41,8 @@ intros[12:33] <- scale(intros[12:33])
 colnames(intros)[which(colnames(intros) == "r_failure")]<-"r_success"
 intros$r_success <- as.integer(intros$r_success)
 
+#save a csv version to share
+write.csv(x = intros,file = "data/mean_phy_metrics_output.csv",row.names = F)
 ##############################
 
 #Is it worth including source range size and richness, or are they too correlated?
